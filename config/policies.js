@@ -26,12 +26,13 @@ module.exports.policies = {
      *                                                                          *
      ***************************************************************************/
 
-    '*': true,
+    '*': ['isAuthorized'], // Everything resctricted here
+    'UserController': {
+        'create': true // We dont need authorization here, this is signup
+    },
 
-    PostController: {
-        restricted: ['sessionAuth'],
-        open: true,
-        jwt: ['hasJsonWebToken']
+    'AuthController': {
+        '*': true // We dont need authorization here, this is login
     }
     /***************************************************************************
      *                                                                          *
