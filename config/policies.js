@@ -26,13 +26,11 @@ module.exports.policies = {
      *                                                                          *
      ***************************************************************************/
 
-    '*': ['isAuthorized'], // Everything resctricted here
-    'UserController': {
-        'create': true // We dont need authorization here, this is signup
-    },
+    '*': ['isAuthorized'], // all routes go through here
+
 
     'AuthController': {
-        '*': true // We dont need authorization here, this is login
+        '*': true //  dont need authorization here, this is signup/signin
     }
     /***************************************************************************
      *                                                                          *

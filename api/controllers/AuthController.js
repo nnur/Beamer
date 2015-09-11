@@ -1,50 +1,52 @@
 /**
  * AuthController
- *
- * @description :: Server-side logic for managing Auths
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
+ * @description :: Server-side logic for manage user's authorization
  */
+var passport = require('passport');
+
+
+
+
+function _onPassportAuth(req, res, error, user, info) {
+    if (error) return res.serverError(error);
+    if (!user) return res.unauthorized(null, info && info.code, info && info.message);
+
+    return res.ok({
+        // TODO: replace with new type of cipher service
+        token: CipherService.createToken(user),
+        user: user
+    });
+}
 
 module.exports = {
-    login: function(req, res) {
-        var email = req.param('email');
-        var password = req.param('password');
 
-        if (!email || !password) {
-            return res.json(401, {
-                err: 'email and password required'
-            });
-        }
 
-        User.findOne({
-            email: email
-        }, function(err, user) {
-            if (!user) {
-                return res.json(401, {
-                    err: 'invalid email or password'
-                });
-            }
 
-            User.comparePassword(password, user, function(err, valid) {
-                if (err) {
-                    return res.json(403, {
-                        err: 'forbidden'
-                    });
-                }
+    signup: function(req, res) {
+        User
+            .create(_.omit(req.allParams(), 'id'))
+            .then(function(user) {
+                return {
 
-                if (!valid) {
-                    return res.json(401, {
-                        err: 'invalid email or password'
-                    });
-                } else {
-                    res.json({
-                        user: user,
-                        token: jwToken.issue({
-                            id: user.id
-                        })
-                    });
-                }
-            });
-        })
+                    token: CipherService.createToken(user),
+                    user: user,
+
+                };
+            })
+            .then(res.created)
+            .catch(res.serverError);
+    },
+
+
+    signin: function(req, res) {
+        passport.authenticate('local',
+            _onPassportAuth.bind(this, req, res))(req, res);
+    },
+
+    googleSignin: function(req, res) {
+
+        passport.authenticate('google-oauth-jwt', _onPassportAuth.bind(this, req, res))(req, res);
+
     }
-};
+
+}
