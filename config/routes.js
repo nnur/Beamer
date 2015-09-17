@@ -32,7 +32,7 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
 
-    'get /homepage': 'UserController.profile'
+    // 'get /homepage': 'UserController.profile'
 
     /***************************************************************************
      *                                                                          *

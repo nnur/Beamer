@@ -5,7 +5,7 @@
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
 
@@ -18,30 +18,40 @@ module.exports = {
             unique: true // Yes unique one
         },
 
-        googleEmail: {
-            type: 'email',
-            required: 'true',
-            unique: true // Yes unique one
-        },
 
         encryptedPassword: {
             type: 'string'
         },
+
+        blogs: {
+
+            type: 'array',
+
+
+        },
         // We don't wan't to send back encrypted password either
         toJSON: function() {
             var obj = this.toObject();
+
             delete obj.encryptedPassword;
             return obj;
         }
     },
     // Here we encrypt password before creating a User
     beforeCreate: function(values, next) {
-        CipherService.hashPassword(values);
+
+        values.encryptedPassword = bcrypt.hashSync(values.password);
         next();
     },
 
     comparePassword: function(password, user, cb) {
-        CipherService.comparePassword(password, user);
-        next();
+        if (bcrypt.compareSync(password, user.encryptedPassword)) {
+            cb(null, true);
+        } else {
+            // cb({
+            //     'error passwords do not match'
+            // });
+        }
+
     }
 };
