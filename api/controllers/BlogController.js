@@ -106,6 +106,8 @@ module.exports = {
 
             });
 
+        } else {
+            res.send('restricted');
         }
 
     },
@@ -128,6 +130,8 @@ module.exports = {
                 }
             });
 
+        } else {
+            res.send('restricted');
         }
 
     }
