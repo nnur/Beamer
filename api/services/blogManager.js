@@ -1,51 +1,64 @@
- module.exports.addBlog = function(id, blog) {
+ module.exports.addBlog = function(id, blog, cb) {
 
      User.findOne({
          id: id
      }, function(err, user) {
 
-         if (!user) {
-             return res.json(401, {
-                 err: 'the user does not exist'
-             })
-         } else {
+         if (err) {
+
+             cb(null, err);
+         } else if (user) {
 
              if (!user.blogs) {
                  user.blogs = [];
-
              }
+
 
              user.blogs.push(blog);
 
              user.save(function(err) {
                  if (err) {
 
-                     return res.json(401, {
-                         err: 'user not saved'
-                     });
+                     cb(null, err);
 
                  }
+
+                 cb(blog, null);
              });
          }
 
      });
  }
 
- module.exports.getBlog = function(id) {
-
-     Blog.findOne({
-             id: id
-         },
 
 
-         function(err, blog) {
-             if (blog) {
+ module.exports.getBlog = function(userid, blogid, cb) {
 
-                 return blog;
-             } else if (err) {
-                 res.send(err);
+     User.findOne({
+         id: userid
+     }, function(err, user) {
+
+         if (err) {
+             cb(null, err);
+         } else if (user) {
+
+             if (!user.blogs) {
+                 user.blogs = [];
+
              }
 
-         });
+
+             var size = user.blogs.length;
+
+             for (var i = 0; i < size; i++) {
+
+                 if (user.blogs[i].id == blogid) {
+                     cb(user.blogs[i], null);
+                 }
+             }
+
+         }
+
+     });
 
  }

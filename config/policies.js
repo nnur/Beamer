@@ -26,7 +26,7 @@ module.exports.policies = {
      *                                                                          *
      ***************************************************************************/
 
-    // '*': ['isAuthorized'], // all routes go through here
+    '*': ['isAuthorized'], // all routes go through here
 
     'UserController': {
         'signup': true, // We dont need authorization here, allowing public access
