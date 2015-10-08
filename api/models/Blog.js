@@ -22,7 +22,22 @@ module.exports = {
             type: 'string',
             required: 'true',
             unique: false
+        },
+
+        userid: {
+
         }
 
+
+
+    },
+
+    beforeDestroy: function(values, next) {
+
+        console.log('hehe');
+        console.log(values);
     }
+
+
+
 };

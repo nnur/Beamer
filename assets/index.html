@@ -1,1 +1,30 @@
-asdasdsd
+<!-- index.html -->
+<!DOCTYPE html>
+<html ng-app="seed">
+  <head>
+
+    <title> DELICIOUS FISH STICKS </title>
+
+    <!-- LIBRARIES -->
+    <script src="assets/node_modules/angular/angular.js"></script>
+    <script src="assets/node_modules/angular-route/angular-route.js"></script>
+    <script src="assets/node_modules/ng-file-upload/dist/ng-file-upload-shim.js"></script>
+    <script src="assets/node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
+
+   
+
+    <!-- VIEWS -->
+    <script type="text/javascript" src="views/main/main-controller.js"></script>
+
+    <!-- MAIN APP FILES -->
+    <script type="text/javascript" src="app-module.js"></script>
+    <script type="text/javascript" src="app-routes.js"></script>
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="assets/node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+	<body>
+	    <!-- this is where content will be injected -->
+	    <div ng-view>
+	    </div>
+	</body>

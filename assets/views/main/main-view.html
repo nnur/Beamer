@@ -1,0 +1,38 @@
+
+
+<link rel="stylesheet"  href="views/main/main-style.css">
+
+<div class="container">
+	<!-- title -->
+
+	<center>
+	<div class="row">
+		
+		
+		<div class="col-lg-6 nur-title-block">
+			<input class="form-control nur-text" ng-model="blog.title"/>
+		</div>
+		
+	</div>
+	</center>
+
+	<!-- content -->
+	<div class="row">
+		<div class="jumbotron nur-jumbo">
+			
+			<textarea class="form-control nur-textarea" rows="15" ng-model="blog.body" ></textarea>
+			
+			
+		</div>
+
+	</div>
+
+	<!-- buttons -->
+	<div class="row">
+	<button class="btn btn-default" ngf-select ng-model="files" > Upload Images </button>
+	<button class="btn btn-default nur-sub-butt" ng-click="publish()">Submit</button>	
+	</div>
+
+	
+	
+</div>

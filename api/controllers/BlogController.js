@@ -13,7 +13,10 @@ module.exports = {
     create: function(req, res) {
 
 
-        var userId = req.token.id;
+        var tokenid = req.token.id;
+        req.body.userid = tokenid;
+
+
 
         Blog.create(req.body).exec(function(err, blog) {
             if (err) {
@@ -25,7 +28,7 @@ module.exports = {
             if (blog) {
 
                 //update user's blog list
-                blogManager.addBlog(userId, blog.id, function(blog, err) {
+                blogManager.addBlog(tokenid, blog.id, function(blog, err) {
 
                     if (blog) {
                         res.send(blog);
@@ -45,27 +48,19 @@ module.exports = {
 
         var userid = req.token.id;
 
+        Blog.find()
+            .where({
+                userid: userid
+            })
+            .exec(function(err, blogs) {
 
-        User.findOne({
-            id: userid
-        }, function(err, user) {
-
-            if (err) {
-
-                res.send(err);
-
-            } else if (user) {
-
-                if (!user.blogs) {
-                    user.blogs = [];
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(blogs);
                 }
 
-                res.send(user.blogs);
-            }
-
-
-
-        });
+            });
 
     },
 
@@ -73,71 +68,68 @@ module.exports = {
 
         var tokenid = req.token.id;
         var blogid = req.body.blogid;
-        var userid = req.body.userid;
 
-        //safety check
-        if (userid == tokenid) {
 
-            Blog.findOne({
-                id: blogid
-            }, function(err, blog) {
-                if (blog) {
+        Blog.findOne({
+            id: blogid
+        }, function(err, blog) {
+            if (blog && blog.userid == tokenid) {
 
-                    if (!blog.text) {
+                if (!blog.text) {
 
-                        blog.text = "";
-                    }
-
-                    blog.text = req.body.text;
-
-                    blog.save(function(error) {
-                        if (error) {
-
-                            res.send(error);
-
-                        } else {
-                            res.send(blog);
-                        }
-                    });
-
-                } else {
-                    res.send(err);
+                    blog.text = "";
                 }
 
-            });
+                blog.text = req.body.text;
 
-        } else {
-            res.send('restricted');
-        }
+                blog.save(function(error) {
+                    if (error) {
+
+                        res.send(error);
+
+                    } else {
+                        res.send(blog);
+                    }
+                });
+
+            } else if (err) {
+                res.send(err);
+            } else {
+                res.send('could not update');
+            }
+
+        });
+
+
 
     },
 
+
+    //tst userid
     delete: function(req, res) {
 
 
         var blogid = req.body.blogid;
-        var userid = req.body.userid;
+        var tokenid = req.token.id;
 
-        //safety check
-        if (userid == tokenid) {
-            Blog.destroy({
-                id: req.body.id
-            }).exec(function deleteCB(err) {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.send('The blog has been deleted');
-                }
-            });
 
-        } else {
-            res.send('restricted');
-        }
+
+        Blog.destroy({
+            id: req.body.id,
+            userid: tokenid
+
+        }).exec(function deleteCB(err, blog) {
+            if (err) {
+                res.send(err);
+            } else {
+
+                res.send(blog);
+
+                blogManager.deleteBlog(tokenid, blog.id);
+
+            }
+        });
 
     }
-
-    //end
-
-
 
 };

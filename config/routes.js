@@ -34,6 +34,9 @@ module.exports.routes = {
 
     // 'get /homepage': 'UserController.profile'
 
+    // 'get /signup': {
+    //     view: 'signup'
+    // }
     /***************************************************************************
      *                                                                          *
      * Custom routes here...                                                    *
