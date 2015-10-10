@@ -6,4 +6,9 @@ app.config(function($routeProvider) {
         controller: 'MainController'
     })
 
+    .when('/login', {
+        templateUrl: 'views/login/login-view.html',
+        controller: 'LoginController'
+    })
+
 });
