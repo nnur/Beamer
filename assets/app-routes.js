@@ -1,14 +1,14 @@
 app.config(function($routeProvider) {
     $routeProvider
 
-    .when('/', {
+    .when('/profile', {
         templateUrl: 'views/main/main-view.html',
         controller: 'MainController'
     })
 
-    .when('/login', {
-        templateUrl: 'views/login/login-view.html',
-        controller: 'LoginController'
+    .when('/signup', {
+        templateUrl: 'views/signup/signup-view.html',
+        controller: 'SignupController'
     })
 
 });

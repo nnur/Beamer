@@ -48,20 +48,14 @@ module.exports = {
         }, function(err, user) {
             if (!user) {
                 return res.json(401, {
-                    err: 'invalid email or password'
+                    err: 'invalid email'
                 });
             }
 
-            User.comparePassword(password, user, function(err, valid) {
+            User.comparePassword(password, user, function(err) {
                 if (err) {
-                    return res.json(403, {
-                        err: 'forbidden'
-                    });
-                }
-
-                if (!valid) {
                     return res.json(401, {
-                        err: 'invalid email or password'
+                        err: 'invalid password'
                     });
                 } else {
                     res.json({

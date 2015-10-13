@@ -1,0 +1,26 @@
+  <form novalidate name="signupForm">
+
+	<input type="text" ng-model="user.newEmail" required/> 
+	<input type="text" ng-model="user.newPwd" name='uPwd' required ng-minlength="6" ng-maxlength="40"/>
+	<input type="text" ng-model="user.pwd2" required  ng-minlength="6" ng-maxlength="40"/>
+
+
+	<button ng-disabled="signupForm.$invalid" ng-click="signup()">sign up</button>
+
+
+	  <span ng-show="signupForm.uPwd.$error.minlength">password less than 6 chars bitch.</span>
+	  <span ng-show="signupForm.uPwd.$error.maxlength">password longer than 40 chars.</span>
+	 
+
+	<br>
+	<br>
+
+
+</form>
+
+
+ <form novalidate name="loginForm">
+	<input type="text" ng-model="user.email" required/> 
+	<input type="text" ng-model="user.pwd" name='pwd' required/>
+	<button ng-disabled="loginForm.$invalid" ng-click="login()">login</button>
+</form>

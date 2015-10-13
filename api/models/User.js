@@ -46,11 +46,9 @@ module.exports = {
 
     comparePassword: function(password, user, cb) {
         if (bcrypt.compareSync(password, user.encryptedPassword)) {
-            cb(null, true);
-        } else {
-            // cb({
-            //     'error passwords do not match'
-            // });
+            cb(false);
+        } else { //err
+            cb(true);
         }
 
     }

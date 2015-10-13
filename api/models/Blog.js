@@ -12,7 +12,7 @@ module.exports = {
     attributes: {
 
         text: {
-            type: 'string',
+            type: 'text',
             required: false,
             unique: false
 
