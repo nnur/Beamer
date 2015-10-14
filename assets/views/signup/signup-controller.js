@@ -1,4 +1,4 @@
-angular.module('seed-signup', [])
+angular.module('beamer.controllers.signup', [])
 
 
 .controller('SignupController', ["$scope", "authService",

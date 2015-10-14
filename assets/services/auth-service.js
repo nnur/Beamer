@@ -1,4 +1,6 @@
-app.service('authService', [
+angular.module('beamer.auth', ['beamer.session'])
+
+.service('authService', ['sessionService', '$http', '$location',
 
 
     function($http, $location, sessionService) {
@@ -6,10 +8,10 @@ app.service('authService', [
 
         this.createNewUser = function(user) {
             // // send user info to server
-        $http.post('http://localhost:1337/user/signup', user)
-            .success(SignupSuccess)
-            .error(SignupError);
-        // sessionService.startSession();
+            // $http.post('http://localhost:1337/user/signup', user)
+            //     .success(SignupSuccess)
+            //     .error(SignupError);
+            console.log(sessionService.startSession())
 
         }
 

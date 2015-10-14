@@ -1,4 +1,4 @@
-angular.module('seed-main', [])
+angular.module('beamer.controllers.main', [])
 
 
 .controller('MainController', ["$scope", "$http", 'Upload',
