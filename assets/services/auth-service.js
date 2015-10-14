@@ -11,7 +11,7 @@ angular.module('beamer.auth', ['beamer.session'])
             // $http.post('http://localhost:1337/user/signup', user)
             //     .success(SignupSuccess)
             //     .error(SignupError);
-            console.log(sessionService.startSession())
+            console.log(sessionService)
 
         }
 
