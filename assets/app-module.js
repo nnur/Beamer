@@ -1,1 +1,1 @@
-var app = angular.module('seed', ['ngRoute', 'seed-main', 'seed-signup', 'ngFileUpload']);
+app = angular.module('seed', ['ngRoute', 'seed-main', 'seed-signup', 'ngFileUpload']);

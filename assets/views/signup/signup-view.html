@@ -1,8 +1,8 @@
   <form novalidate name="signupForm">
 
-	<input type="text" ng-model="user.newEmail" required/> 
-	<input type="text" ng-model="user.newPwd" name='uPwd' required ng-minlength="6" ng-maxlength="40"/>
-	<input type="text" ng-model="user.pwd2" required  ng-minlength="6" ng-maxlength="40"/>
+	<input type="text" ng-model="user.newEmail" placeholder="email" required/> 
+	<input type="text" ng-model="user.newPwd" name='uPwd' placeholder="password" required ng-minlength="6" ng-maxlength="40"/>
+	<input type="text" ng-model="user.pwd2" required placeholder="confirm password" ng-minlength="6" ng-maxlength="40"/>
 
 
 	<button ng-disabled="signupForm.$invalid" ng-click="signup()">sign up</button>
@@ -20,7 +20,7 @@
 
 
  <form novalidate name="loginForm">
-	<input type="text" ng-model="user.email" required/> 
-	<input type="text" ng-model="user.pwd" name='pwd' required/>
+	<input type="text" ng-model="user.email" placeholder="email" required/> 
+	<input type="text" ng-model="user.pwd" name='pwd' placeholder="password" required/>
 	<button ng-disabled="loginForm.$invalid" ng-click="login()">login</button>
 </form>

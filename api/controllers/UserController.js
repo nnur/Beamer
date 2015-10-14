@@ -50,23 +50,35 @@ module.exports = {
                 return res.json(401, {
                     err: 'invalid email'
                 });
-            }
+            } else {
 
-            User.comparePassword(password, user, function(err) {
-                if (err) {
-                    return res.json(401, {
-                        err: 'invalid password'
-                    });
-                } else {
-                    res.json({
-                        user: user,
-                        token: jwToken.issue({
-                            id: user.id
-                        })
-                    });
-                }
-            });
-        })
+                User.comparePassword(password, user, function(err) {
+                    if (err) {
+                        return res.json(401, {
+                            err: 'invalid password'
+                        });
+                    } else {
+                        res.json({
+                            user: user,
+                            token: jwToken.issue({
+                                id: user.id
+                            })
+                        });
+                    }
+                });
+            }
+        });
+
+    },
+
+    deleteUser: function(req, res) {
+        var userid = req.token.id;
+
+        User.destroy({
+            id: userid
+        }).exec(function deleteCB(err) {
+            res.send('user has been deleted')
+        });
 
     }
 
