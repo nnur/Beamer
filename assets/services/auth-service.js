@@ -1,6 +1,6 @@
 angular.module('beamer.auth', ['beamer.session'])
 
-.service('authService', ['sessionService', '$http', '$location',
+.service('authService', ['$http', '$location', 'sessionService',
 
 
     function($http, $location, sessionService) {
@@ -8,10 +8,10 @@ angular.module('beamer.auth', ['beamer.session'])
 
         this.createNewUser = function(user) {
             // // send user info to server
-            // $http.post('http://localhost:1337/user/signup', user)
-            //     .success(SignupSuccess)
-            //     .error(SignupError);
-            console.log(sessionService)
+            $http.post('http://localhost:1337/user/signup', user)
+                .success(SignupSuccess)
+                .error(SignupError);
+
 
         }
 
@@ -45,6 +45,8 @@ angular.module('beamer.auth', ['beamer.session'])
                 }
 
             }
+
+
         }
 
         function SignupSuccess(data) {
@@ -60,8 +62,10 @@ angular.module('beamer.auth', ['beamer.session'])
 
         function LoginSuccess(data) {
 
-            console.log(data)
+
             $location.path("/profile");
+
+            sessionService.getSession(data);
 
         }
 

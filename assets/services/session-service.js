@@ -1,18 +1,39 @@
-angular.module('beamer.session', [])
+angular.module('beamer.session', ['angular-jwt'])
 
-.service('sessionService', function()
+.service('sessionService', ['jwtHelper',
+
+    function(jwtHelper, $httpProvider, jwtInterceptorProvider)
 
     {
-        this.startSession = function() {
 
-            // var expToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NhbXBsZXMuYXV0aDAuY29tLyIsInN1YiI6ImZhY2Vib29rfDEwMTU0Mjg3MDI3NTEwMzAyIiwiYXVkIjoiQlVJSlNXOXg2MHNJSEJ3OEtkOUVtQ2JqOGVESUZ4REMiLCJleHAiOjE0MTIyMzQ3MzAsImlhdCI6MTQxMjE5ODczMH0.7M5sAV50fF1-_h9qVbdSgqAnXVF7mz3I6RjS6JiH0H8';
+        var session;
 
-            // var tokenPayload = jwtHelper.decodeToken(expToken);
+        function createSession(data) {
 
-            console.log('tokenPayload')
+            var sessionObj = {};
 
-        }
+            sessionObj.expDate = jwtHelper.getTokenExpirationDate(data.token);
+            sessionObj.userid = jwtHelper.decodeToken(data.token).id;
+            session.token = data.token;
 
-        this.endSession = function() {}
+            return sessionObj;
+        };
+
+        this.getSession = function(data) {
+
+            if (!session) {
+
+                session = createSession(data);
+            }
+
+            return session;
+
+        };
+
+        this.endSession = function() {
+            if (jwtHelper.isTokenExpired(session.token)) {
+                session = null;
+            }
+        };
     }
-);
+]);
