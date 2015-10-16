@@ -23,7 +23,7 @@
         "grunt-sails-linker": "~0.9.5",
         "grunt-sync": "~0.0.4",
         "include-all": "~0.1.3",
-
+        "jasmine-node": "^1.14.5",
         "jsonwebtoken": "^5.0.5",
         "rc": "~0.5.0",
         "request": "^2.64.0",
@@ -43,5 +43,10 @@
         "url": "git://github.com/nnur/project.git"
     },
     "author": "nnur",
-    "license": ""
+    "license": "",
+    "devDependencies": {
+        "jasmine-core": "^2.3.4",
+        "karma": "^0.13.11",
+        "karma-jasmine": "^0.3.6"
+    }
 }
