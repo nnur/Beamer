@@ -1,7 +1,7 @@
 angular.module('beamer.controllers.signup', [])
 
 
-.controller('SignupController', ["$scope", "authService",
+.controller('SignupController', ["$scope", "auth",
     function($scope, authService) {
 
 
@@ -12,7 +12,7 @@ angular.module('beamer.controllers.signup', [])
                 var user = {
                     email: $scope.user.newEmail,
                     password: $scope.user.newPwd
-                }
+                };
 
                 authService.createNewUser(user);
 
@@ -22,7 +22,7 @@ angular.module('beamer.controllers.signup', [])
 
                 alert("passwords don't match");
             }
-        }
+        };
 
 
         $scope.login = function() {
@@ -30,10 +30,16 @@ angular.module('beamer.controllers.signup', [])
             var user = {
                 email: $scope.user.email,
                 password: $scope.user.pwd
-            }
+            };
 
-            authService.loginUser(user);
-        }
+            authService.loginUser('po')
+                .then(function(data) {
+                    console.log("first fun", data);
+                }, function(data) {
+                    console.log("senodn fun", data);
+
+                });
+        };
 
     }
 ]);

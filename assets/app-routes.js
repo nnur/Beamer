@@ -1,7 +1,5 @@
 app.config(function($routeProvider) {
-    $routeProvider
-
-    .when('/profile', {
+    $routeProvider.when('/profile', {
         templateUrl: 'views/main/main-view.html',
         controller: 'MainController'
     })
@@ -10,5 +8,7 @@ app.config(function($routeProvider) {
         templateUrl: 'views/signup/signup-view.html',
         controller: 'SignupController'
     })
+
+    .otherwise('/signup');
 
 });
