@@ -13,10 +13,11 @@ Session.prototype.create = function(token) {
 };
 
 Session.prototype.destroy = function() {
-    // debugger;
-    if (this.jwtHelper_.isTokenExpired(this.token)) {
-        this.expDate = null;
-        this.userid = null;
-        this.token = null;
-    }
+    this.expDate = null;
+    this.userid = null;
+    this.token = null;
 };
+
+Session.prototype.isValid = function() {
+    return this.jwtHelper_.isTokenExpired(this.token);
+}

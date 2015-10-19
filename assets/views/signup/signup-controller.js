@@ -2,7 +2,7 @@ angular.module('beamer.controllers.signup', [])
 
 
 .controller('SignupController', ["$scope", "auth",
-    function($scope, authService) {
+    function($scope, auth) {
 
 
         $scope.signup = function() {
@@ -14,7 +14,12 @@ angular.module('beamer.controllers.signup', [])
                     password: $scope.user.newPwd
                 };
 
-                authService.createNewUser(user);
+                auth.createNewUser(user).then(function(data) {
+                    console.log(data);
+
+                }, function(err) {
+                    console.log(err);
+                });
 
 
 
@@ -32,13 +37,6 @@ angular.module('beamer.controllers.signup', [])
                 password: $scope.user.pwd
             };
 
-            authService.loginUser('po')
-                .then(function(data) {
-                    console.log("first fun", data);
-                }, function(data) {
-                    console.log("senodn fun", data);
-
-                });
         };
 
     }

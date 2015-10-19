@@ -1,7 +1,7 @@
 app.config(function($routeProvider) {
     $routeProvider.when('/profile', {
-        templateUrl: 'views/main/main-view.html',
-        controller: 'MainController'
+        templateUrl: 'views/profile/profile-view.html',
+        controller: 'ProfileController'
     })
 
     .when('/signup', {

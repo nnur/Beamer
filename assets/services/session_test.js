@@ -54,7 +54,6 @@ describe('session service', function() {
 
 
     it('should destroy the session', function() {
-        jwtHelper.isTokenExpired = jasmine.createSpy('isTokenExpired').and.returnValue(true);
 
         angular.extend(session, {
             expDate: 'testDate',
@@ -67,6 +66,14 @@ describe('session service', function() {
         expect(session.expDate).toBeNull();
         expect(session.userid).toBeNull();
         expect(session.token).toBeNull();
+    });
+
+
+    it('should check if token is valid and return boolean', function() {
+        session.token = "testToken";
+        jwtHelper.isTokenExpired = jasmine.createSpy('isTokenExpired').and.returnValue(true);
+        expect(jwtHelper.getTokenExpirationDate).toHaveBeenCalledWith("testToken");
+
     });
 
 });

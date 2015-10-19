@@ -1,7 +1,7 @@
-angular.module('beamer.controllers.main', [])
+angular.module('beamer.controllers.profile', [])
 
 
-.controller('MainController', ["$scope", "$http", 'Upload',
+.controller('ProfileController', ["$scope", "$http", 'Upload',
 
     function($scope, $http, Upload) {
 
