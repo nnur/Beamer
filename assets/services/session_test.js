@@ -1,16 +1,23 @@
 describe('session service', function() {
+
+
+
     var session, jwtHelper;
 
 
+    beforeEach(function() {
 
-    angular.module('angular-jwt', []);
+        angular.module('angular-jwt', []);
+        module('beamer.session');
 
-    beforeEach(module('beamer.session'));
+        module(function($provide) {
+            jwtHelper = {};
+            $provide.value('jwtHelper', jwtHelper);
 
-    beforeEach(module(function($provide) {
-        jwtHelper = {};
-        $provide.value('jwtHelper', jwtHelper);
-    }));
+        });
+
+
+    });
 
     beforeEach(inject(function(_session_) {
         session = _session_;
@@ -23,7 +30,6 @@ describe('session service', function() {
         expect(session.expDate).toBeUndefined();
         expect(session.userid).toBeUndefined();
         expect(session.token).toBeUndefined();
-        expect(jwtHelper).toBe(session.jwtHelper_);
     });
 
 
@@ -69,10 +75,12 @@ describe('session service', function() {
     });
 
 
-    it('should check if token is valid and return boolean', function() {
+    it('should check if token is valid and returns the result', function() {
         session.token = "testToken";
-        jwtHelper.isTokenExpired = jasmine.createSpy('isTokenExpired').and.returnValue(true);
-        expect(jwtHelper.getTokenExpirationDate).toHaveBeenCalledWith("testToken");
+        jwtHelper.isTokenExpired = jasmine.createSpy('isTokenExpired').and.returnValue('boolean');
+        session.isValid();
+        expect(jwtHelper.isTokenExpired).toHaveBeenCalledWith("testToken");
+        expect(session.isValid()).toEqual('boolean');
 
     });
 

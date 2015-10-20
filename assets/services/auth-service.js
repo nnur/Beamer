@@ -1,41 +1,41 @@
 angular.module('beamer.auth', ['beamer.session'])
-    .service('auth', ['$http', '$location', 'session', '$q',
-        function($http, $location, session, $q) {
+
+.service('auth', ['$http', 'session', '$q',
+    function($http, session, $q) {
 
 
-            var root = 'http://localhost:1337';
+        var root = 'http://localhost:1337';
 
-            this.isAuthenticated = function() {
-                return session.isValid();
-            }
+        this.isAuthenticated = function() {
+            return session.isValid();
+        };
 
-            this.createNewUser = function(user) {
-                var promise = $http({
-                    method: 'POST',
-                    url: root + '/user/signup'
-                });
+        this.createNewUser = function(user) {
+            var promise = $http({
+                method: 'POST',
+                url: root + '/user/signup'
+            });
 
-                return promise;
-            };
+            return promise;
+        };
 
 
-            this.loginUser = function(user) {
-                var promise = $http({
-                    method: 'POST',
-                    url: root + '/user/login'
-                });
+        this.loginUser = function(user) {
+            var promise = $http({
+                method: 'POST',
+                url: root + '/user/login'
+            });
 
-                return promise;
-            }
-        }
-
+            return promise;
+        };
 
         this.logout = function() {
             session.destroy();
-        }
+        };
+    }
 
 
-    ]);
+]);
 
 
 

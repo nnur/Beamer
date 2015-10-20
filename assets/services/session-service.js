@@ -1,23 +1,20 @@
 angular.module('beamer.session', ['angular-jwt'])
-    .service('session', ['jwtHelper', Session]);
+    .service('session', ['jwtHelper', function(jwtHelper) {
 
+        this.create = function(token) {
+            this.expDate = jwtHelper.getTokenExpirationDate(token);
+            this.userid = jwtHelper.decodeToken(token).id;
+            this.token = token;
+        };
 
-function Session(jwtHelper) {
-    this.jwtHelper_ = jwtHelper;
-}
+        this.destroy = function() {
+            this.expDate = null;
+            this.userid = null;
+            this.token = null;
+        };
 
-Session.prototype.create = function(token) {
-    this.expDate = this.jwtHelper_.getTokenExpirationDate(token);
-    this.userid = this.jwtHelper_.decodeToken(token).id;
-    this.token = token;
-};
+        this.isValid = function() {
+            return jwtHelper.isTokenExpired(this.token);
+        };
 
-Session.prototype.destroy = function() {
-    this.expDate = null;
-    this.userid = null;
-    this.token = null;
-};
-
-Session.prototype.isValid = function() {
-    return this.jwtHelper_.isTokenExpired(this.token);
-}
+    }]);
