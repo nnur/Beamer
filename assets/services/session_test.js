@@ -13,7 +13,6 @@ describe('session service', function() {
         module(function($provide) {
             jwtHelper = {};
             $provide.value('jwtHelper', jwtHelper);
-
         });
 
 

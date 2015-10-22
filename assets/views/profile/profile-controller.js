@@ -1,12 +1,13 @@
-angular.module('beamer.controllers.profile', [])
+/** profile */
 
+angular.module('beamer.controllers.profile', [])
 
 .controller('ProfileController', ["$scope", "$http", 'Upload',
 
     function($scope, $http, Upload) {
 
         $scope.blog = {
-            title: 'titillate'
+            title: 'New Blog'
         };
 
         $scope.files = {};
@@ -16,9 +17,6 @@ angular.module('beamer.controllers.profile', [])
         });
 
         $scope.publish = function() {
-
-
-
             // Send text content
             $http.post('http://localhost:8000/blog', $scope.blog).
             success(function(data, status, headers, config) {
@@ -30,8 +28,7 @@ angular.module('beamer.controllers.profile', [])
 
 
             $scope.blog = {};
-
-        }
+        };
 
 
         //send img content
@@ -56,6 +53,6 @@ angular.module('beamer.controllers.profile', [])
                 }
             }
 
-        }
+        };
     }
 ]);

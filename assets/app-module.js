@@ -3,7 +3,9 @@ app = angular.module('beamer', ['beamer.controllers.profile', 'beamer.controller
 ]);
 
 app.run(function($rootScope) {
-    $rootScope.$on('logout', function() {
+    $rootScope.$on('routeChanged', function() {
         alert('aay');
     });
+
+
 });

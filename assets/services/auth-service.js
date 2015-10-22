@@ -3,76 +3,50 @@ angular.module('beamer.auth', ['beamer.session'])
 .service('auth', ['$http', 'session', '$q',
     function($http, session, $q) {
 
-
         var root = 'http://localhost:1337';
 
+        /** Checks session expiry. Returns boolean*/
         this.isAuthenticated = function() {
             return session.isValid();
         };
 
+        /** Posts user to /signup and creates a session if 
+         *server responds with a token. Returns a promise.
+         */
         this.createNewUser = function(user) {
             var promise = $http({
                 method: 'POST',
-                url: root + '/user/signup'
+                url: root + '/user/signup',
+                data: user
+            }).then(function(data) {
+                if (data.data.token) {
+                    session.create(data.data.token);
+                    return data;
+                }
             });
-
             return promise;
         };
 
-
+        /** Posts user to /login and creates a session if 
+         *server responds with a token. Returns a promise.
+         */
         this.loginUser = function(user) {
             var promise = $http({
                 method: 'POST',
-                url: root + '/user/login'
+                url: root + '/user/login',
+                data: user
+            }).then(function(data) {
+                if (data.data.token) {
+                    session.create(data.data.token);
+                    return data;
+                }
             });
-
             return promise;
         };
 
+        /** Destroys the session*/
         this.logout = function() {
             session.destroy();
         };
     }
-
-
 ]);
-
-
-
-//     //====================== CALLBACK FUNCTIONS ======================//
-
-//     //============================ Signup ===========================//
-
-//     //signup error for invalid attributes
-//     function SignupError(data) {
-//         var errors = Object.keys(data.err.invalidAttributes);
-//         var length = errors.length;
-//         for (var i = 0; i < length; i++) {
-//             if (errors[i] == 'email') {
-//                 console.log(data.err.invalidAttributes);
-//                 alert(data.err.invalidAttributes.email[0].message);
-//             }
-//         }
-//     }
-
-//     function SignupSuccess(data) {
-//         console.log(data);
-//         $location.path("/profile");
-//     }
-
-
-//     //====================== Login ======================//
-
-//     //login error and success
-
-//     function LoginSuccess(data) {
-//         $location.path("/profile");
-//     }
-
-//     function LoginError(data) {
-//         // alert(data.err)
-//     }
-
-
-
-// }

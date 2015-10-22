@@ -18,7 +18,10 @@ module.exports = function(config) {
             'assets/assets/node_modules/angular/angular.js',
             'assets/assets/node_modules/angular-mocks/angular-mocks.js',
             'assets/services/*-service.js',
-            'assets/services/*_test.js'
+            'assets/services/*_test.js',
+            'assets/views/*/*_test.js',
+            'assets/views/*/*-controller.js',
+
 
         ],
 
