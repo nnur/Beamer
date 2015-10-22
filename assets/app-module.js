@@ -2,9 +2,9 @@ app = angular.module('beamer', ['beamer.controllers.profile', 'beamer.controller
     'beamer.auth', 'beamer.session', 'ngFileUpload', 'ngRoute'
 ]);
 
-app.run(function($rootScope) {
+app.run(function($rootScope, $location) {
     $rootScope.$on('routeChanged', function() {
-        alert('aay');
+        alert($location.url());
     });
 
 
