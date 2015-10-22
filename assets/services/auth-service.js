@@ -18,10 +18,9 @@ angular.module('beamer.auth', ['beamer.session'])
                 method: 'POST',
                 url: root + '/user/signup',
                 data: user
-            }).then(function(data) {
-                if (data.data.token) {
-                    session.create(data.data.token);
-                    return data;
+            }).then(function(res) {
+                if (res.data.token) {
+                    session.create(res.data.token);
                 }
             });
             return promise;
@@ -35,10 +34,10 @@ angular.module('beamer.auth', ['beamer.session'])
                 method: 'POST',
                 url: root + '/user/login',
                 data: user
-            }).then(function(data) {
-                if (data.data.token) {
-                    session.create(data.data.token);
-                    return data;
+            }).then(function(res) {
+                if (res.data.token) {
+                    session.create(res.data.token);
+                    return res;
                 }
             });
             return promise;

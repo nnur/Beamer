@@ -77,7 +77,7 @@ module.exports = {
         User.destroy({
             id: userid
         }).exec(function deleteCB(err) {
-            res.send('user has been deleted')
+            res.send('user has been deleted');
         });
 
     }

@@ -11,7 +11,9 @@ angular.module('beamer.controllers.signup', [])
                     email: $scope.user.newEmail,
                     password: $scope.user.pwd1
                 };
-                auth.createNewUser(user).then(this.signupSuccess, this.signupErr);
+                auth.createNewUser(user).then(signupSuccess, signupErr);
+
+
             } else {
                 $scope.error = "passwords don't match";
             }
@@ -21,11 +23,12 @@ angular.module('beamer.controllers.signup', [])
                 email: $scope.user.email,
                 password: $scope.user.pwd
             };
-            auth.loginUser(user).then(this.loginSuccess, this.loginError);
+            auth.loginUser(user).then(loginSuccess, loginError);
         };
 
         /** This parses the error and adds it to the scope to be shown*/
-        this.signupErr = function(res) {
+        function signupErr(res) {
+
             var errorObj = res.data.err;
             var errors = Object.keys(errorObj.invalidAttributes);
             var length = errors.length;
@@ -35,20 +38,22 @@ angular.module('beamer.controllers.signup', [])
                     $scope.error = errorObj.invalidAttributes.email[0].message;
                 }
             }
-        };
+        }
         /** A successful signup routes view to profile*/
-        this.signupSuccess = function(res) {
-            console.log(res);
+        function signupSuccess(res) {
             $location.path("/profile");
-        };
+        }
         /** Adds the login error to the scope to be shown*/
-        this.loginError = function(res) {
-            $scope.error = res.data.err;
-        };
-        /** A successful login routes view to profile*/
-        this.loginSuccess = function(res) {
+        function loginError(res) {
+
             console.log(res);
+            $scope.error = res.data.err;
+        }
+        /** A successful login routes view to profile*/
+        function loginSuccess(res) {
+            console.log(res);
+
             $location.path("/profile");
-        };
+        }
     }
 ]);

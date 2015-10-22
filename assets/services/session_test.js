@@ -76,10 +76,11 @@ describe('session service', function() {
 
     it('should check if token is valid and returns the result', function() {
         session.token = "testToken";
-        jwtHelper.isTokenExpired = jasmine.createSpy('isTokenExpired').and.returnValue('boolean');
+        jwtHelper.isTokenExpired = jasmine.createSpy('isTokenExpired').and.returnValue(true);
         session.isValid();
         expect(jwtHelper.isTokenExpired).toHaveBeenCalledWith("testToken");
-        expect(session.isValid()).toEqual('boolean');
+        expect(session.isValid()).toEqual(false);
+
 
     });
 

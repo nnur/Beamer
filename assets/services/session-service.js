@@ -15,7 +15,11 @@ angular.module('beamer.session', ['angular-jwt'])
         };
         /** Checks if token is expired and returns the result*/
         this.isValid = function() {
-            return jwtHelper.isTokenExpired(this.token);
+            if (this.token) {
+                return !jwtHelper.isTokenExpired(this.token);
+            } else {
+                return false;
+            }
         };
 
     }]);
