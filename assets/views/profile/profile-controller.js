@@ -7,25 +7,30 @@ angular.module('beamer.controllers.profile', [])
     function($scope, $http, Upload) {
 
         $scope.blog = {
-            title: 'New Blog'
+            title: "How to quit your job and blow your nips off"
         };
 
-        $scope.files = {};
+        // $scope.files = {};
 
-        $scope.$watch('files', function() {
-            $scope.upload($scope.files);
-        });
+        // $scope.$watch('files', function() {
+        //     $scope.upload($scope.files);
+        // });
+
 
         $scope.publish = function() {
-            // Send text content
-            $http.post('http://localhost:8000/blog', $scope.blog).
+            var blog = {
+                title: $scope.blog.title,
+                body: $scope.blog.body,
+                userid: 'hinkypinky'
+            };
+
+            $http.post('http://localhost:1337/blog/create', blog).
             success(function(data, status, headers, config) {
                 console.log(data);
             }).
             error(function(data, status, headers, config) {
                 console.log('oops');
             });
-
 
             $scope.blog = {};
         };
@@ -39,8 +44,7 @@ angular.module('beamer.controllers.profile', [])
                     var file = files[i];
 
                     Upload.upload({
-
-                        url: 'http://localhost:8000/img',
+                        url: 'http://localhost:1337/blog/img',
                         file: file
 
                     }).progress(function(evt) {
