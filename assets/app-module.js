@@ -2,28 +2,20 @@ app = angular.module('beamer', ['beamer.controllers.profile', 'beamer.controller
     'beamer.auth', 'beamer.session', 'ngFileUpload', 'ngRoute', 'angular-jwt'
 ]);
 
-app.run(function($rootScope, $location, auth) {
+app.constant('UnProtected', ['/signup']);
 
-    var Protected = ['/profile'];
+app.run(function($rootScope, $location, auth, UnProtected) {
     var isRouteProtected = function(route) {
-        var index = Protected.indexOf(route);
-
-        if (index == -1) { // the route wasn't found to be protected/
-            return false;
-        } else {
-            return false; //the route is protected
-        }
+        return !(UnProtected.indexOf(route) > -1);
     };
 
     $rootScope.$on('$routeChangeStart', function() {
-
         if (isRouteProtected($location.url()) && !auth.isAuthenticated()) {
             $location.path('/signup');
         }
     });
 });
 
-// app.config(function Config($httpProvider, jwtInterceptorProvider) {
+app.config(function($httpProvider, jwtInterceptorProvider) {
 
-// });
-
+});
