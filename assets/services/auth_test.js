@@ -13,10 +13,12 @@ describe('auth service', function() {
     beforeEach(function() {
         module(function($provide) {
             $provide.service('session', function() {
-                this.isValid = function() {};
-                this.destroy = function() {};
+                this.isValid = jasmine.createSpy('session.isValid');
+                this.destroy = jasmine.createSpy('session.destroy');
+                this.create = jasmine.createSpy('session.create');
             });
         });
+
     });
 
     beforeEach(function() {
@@ -37,25 +39,28 @@ describe('auth service', function() {
 
     it('should check if session is valid and return the result',
         function() {
-            spyOn(mockSession, 'isValid').and.returnValue(true);
             auth.isAuthenticated();
             expect(mockSession.isValid).toHaveBeenCalled();
         });
 
     it('should logout the user by destroying their session',
         function() {
-            spyOn(mockSession, 'destroy').and.callThrough();
             auth.logout();
             expect(mockSession.destroy).toHaveBeenCalled();
         });
-
+    /** createNewUser */
     it('should send a post to /signup and receive a promise',
         function() {
             var user = 'testUser';
+            var res = {
+                token: 'testToken'
+            };
 
             $httpBackend.expectPOST(root + '/user/signup', user)
-                .respond(deferred.promise);
+                .respond(res);
             auth.createNewUser(user);
+            //TODO
+            // expect(mockSession.create).toHaveBeenCalled();
             $httpBackend.flush();
         });
 

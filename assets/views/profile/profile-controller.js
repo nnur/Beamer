@@ -29,7 +29,7 @@ angular.module('beamer.controllers.profile', [])
                 console.log(data);
             }).
             error(function(data, status, headers, config) {
-                console.log('oops');
+                console.log(data);
             });
 
             $scope.blog = {};

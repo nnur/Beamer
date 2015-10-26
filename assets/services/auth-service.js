@@ -11,7 +11,7 @@ angular.module('beamer.auth', ['beamer.session'])
         };
 
         /** Posts user to /signup and creates a session if 
-         *server responds with a token. Returns a promise.
+         *  server responds with a token. Returns a promise.
          */
         this.createNewUser = function(user) {
             var promise = $http({
@@ -27,7 +27,7 @@ angular.module('beamer.auth', ['beamer.session'])
         };
 
         /** Posts user to /login and creates a session if 
-         *server responds with a token. Returns a promise.
+         *  server responds with a token. Returns a promise.
          */
         this.loginUser = function(user) {
             var promise = $http({
