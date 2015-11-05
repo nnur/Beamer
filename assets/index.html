@@ -1,38 +1,29 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html ng-app="beamer">
-  <head>
 
+<head>
     <title> DELICIOUS FISH STICKS </title>
+    <!-- STYLES -->
+    <link rel="stylesheet" href="assets/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
+    <body>
+        <!-- this is where content will be injected -->
+        <div ng-view>
+        </div>
+    </body>
     <!-- LIBRARIES -->
     <script src="assets/node_modules/angular/angular.js"></script>
     <script src="assets/node_modules/angular-route/angular-route.js"></script>
     <script src="assets/node_modules/ng-file-upload/dist/ng-file-upload-shim.js"></script>
     <script src="assets/node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
-
-    <script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
-
-   
-
+    <script src="assets/node_modules/angular-jwt/dist/angular-jwt.js"></script>
     <!-- CONTROLLERS -->
-    <script type="text/javascript" src="views/main/main-controller.js"></script>
+    <script type="text/javascript" src="views/profile/profile-controller.js"></script>
     <script type="text/javascript" src="views/signup/signup-controller.js"></script>
-
     <!-- MAIN APP FILES -->
     <script type="text/javascript" src="app-module.js"></script>
     <script type="text/javascript" src="app-routes.js"></script>
-
-      <!-- SERVICES -->
+    <!-- SERVICES -->
     <script type="text/javascript" src="services/session-service.js"></script>
     <script type="text/javascript" src="services/auth-service.js"></script>
-   
-
-    <!-- STYLES -->
-    <link rel="stylesheet" href="assets/node_modules/bootstrap/dist/css/bootstrap.min.css">
-
-	<body>
-	    <!-- this is where content will be injected -->
-	    <div ng-view>
-	    </div>
-	</body>
