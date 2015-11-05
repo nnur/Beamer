@@ -18,4 +18,8 @@ app.run(function($rootScope, $location, auth, UnProtected) {
 
 app.config(function($httpProvider, jwtInterceptorProvider) {
 
+    jwtInterceptorProvider.tokenGetter = ['session', function(session) {
+        return session.token;
+    }];
+    $httpProvider.interceptors.push('jwtInterceptor');
 });

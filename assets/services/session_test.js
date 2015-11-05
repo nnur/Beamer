@@ -4,7 +4,6 @@ describe('session service', function() {
 
     var session, jwtHelper;
 
-
     beforeEach(function() {
 
         angular.module('angular-jwt', []);
