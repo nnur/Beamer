@@ -14,7 +14,6 @@ describe('session service', function() {
             $provide.value('jwtHelper', jwtHelper);
         });
 
-
     });
 
     beforeEach(inject(function(_session_) {

@@ -5,14 +5,15 @@ angular.module('beamer.auth', ['beamer.session'])
 
         var root = 'http://localhost:1337';
 
-        /** Checks session expiry. Returns boolean*/
+
+        // Checks session expiry. Returns boolean
         this.isAuthenticated = function() {
             return session.isValid();
         };
 
-        /** Posts user to /signup and creates a session if 
-         *  server responds with a token. Returns a promise.
-         */
+
+        // Creates a new user at /signup and a new session with returned token.
+        // Returns a promise.
         this.createNewUser = function(user) {
             var promise = $http({
                 method: 'POST',
@@ -26,9 +27,8 @@ angular.module('beamer.auth', ['beamer.session'])
             return promise;
         };
 
-        /** Posts user to /login and creates a session if 
-         *  server responds with a token. Returns a promise.
-         */
+        // Posts user to /login and creates a session if 
+        //         server responds with a token. Returns a promise.
         this.loginUser = function(user) {
             var promise = $http({
                 method: 'POST',
@@ -43,7 +43,7 @@ angular.module('beamer.auth', ['beamer.session'])
             return promise;
         };
 
-        /** Destroys the session*/
+        // Destroys the session
         this.logout = function() {
             session.destroy();
         };

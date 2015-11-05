@@ -20,10 +20,7 @@ module.exports = function(config) {
             'assets/services/*-service.js',
             'assets/services/*_test.js',
             'assets/views/*/*_test.js',
-            'assets/views/*/*-controller.js',
-            'assets/*.js'
-
-
+            'assets/views/*/*-controller.js'
         ],
 
 

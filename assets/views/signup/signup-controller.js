@@ -1,10 +1,9 @@
 angular.module('beamer.controllers.signup', [])
 
 .controller('SignupController', ["$scope", "auth", "$location",
-
-    /** Creates user obj with form info and sends it off for authentication.*/
     function($scope, auth, $location) {
 
+        // Creates user obj with form info and sends it off for authentication.
         $scope.signup = function() {
             if ($scope.user.pwd1 === $scope.user.pwd2) {
                 var user = {
@@ -18,6 +17,8 @@ angular.module('beamer.controllers.signup', [])
                 $scope.error = "passwords don't match";
             }
         };
+
+        // Authenticates user credentials.
         $scope.login = function() {
             var user = {
                 email: $scope.user.email,
@@ -26,7 +27,9 @@ angular.module('beamer.controllers.signup', [])
             auth.loginUser(user).then(loginSuccess, loginError);
         };
 
-        /** This parses the error and adds it to the scope to be shown*/
+
+
+        // This parses the error and adds it to the scope to be shown
         function signupErr(res) {
 
             var errorObj = res.data.err;
@@ -39,20 +42,19 @@ angular.module('beamer.controllers.signup', [])
                 }
             }
         }
-        /** A successful signup routes view to profile*/
+
+        // A successful signup routes view to profile
         function signupSuccess(res) {
             $location.path("/profile");
         }
-        /** Adds the login error to the scope to be shown*/
-        function loginError(res) {
 
-            console.log(res);
+        // Adds the login error to the scope to be shown
+        function loginError(res) {
             $scope.error = res.data.err;
         }
-        /** A successful login routes view to profile*/
-        function loginSuccess(res) {
-            console.log(res);
 
+        // A successful login routes view to profile
+        function loginSuccess(res) {
             $location.path("/profile");
         }
     }
