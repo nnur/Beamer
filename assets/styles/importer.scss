@@ -1,0 +1,6 @@
+@import "../assets/node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "variables";
+body {
+    background: url($bg) no-repeat;
+    background-size: cover;
+}

@@ -5,13 +5,11 @@
 <head>
     <title> DELICIOUS FISH STICKS </title>
     <!-- STYLES -->
-    <link rel="stylesheet" href="assets/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/importer.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-    <body>
-        <!-- this is where content will be injected -->
-        <div ng-view>
-        </div>
-    </body>
+<body>
     <!-- LIBRARIES -->
     <script src="assets/node_modules/angular/angular.js"></script>
     <script src="assets/node_modules/angular-route/angular-route.js"></script>
@@ -28,3 +26,9 @@
     <!-- SERVICES -->
     <script type="text/javascript" src="services/session-service.js"></script>
     <script type="text/javascript" src="services/auth-service.js"></script>
+    <!-- this is where content will be injected -->
+    <div ng-view>
+    </div>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-<!-- signup -->
+<!-- signup 
 <form novalidate name="signupForm">
     <input type="text" ng-model="user.newEmail" placeholder="email" required/>
     <input type="text" ng-model="user.pwd1" name='uPwd' placeholder="password" required ng-minlength="6" ng-maxlength="40" />
@@ -8,11 +8,16 @@
     <span ng-show="signupForm.uPwd.$error.maxlength">password longer than 40 chars.</span>
     <br>
     <br>
-</form>
-<!-- login form -->
+</form>-->
+<!-- login form 
 <form novalidate name="loginForm">
     <input type="text" ng-model="user.email" placeholder="email" required/>
     <input type="text" ng-model="user.pwd" name='pwd' placeholder="password" required/>
     <button ng-disabled="loginForm.$invalid" ng-click="login()">login</button>
     <p class="error" ng-show="error">{{error}}</p>
-</form>
+</form>-->
+<div class="row">
+    <div class="col-xs-2 col-xs-offset-5">
+        <input type="text" />
+    </div>
+</div>
