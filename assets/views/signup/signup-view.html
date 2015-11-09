@@ -16,8 +16,11 @@
     <button ng-disabled="loginForm.$invalid" ng-click="login()">login</button>
     <p class="error" ng-show="error">{{error}}</p>
 </form>-->
-<div class="row">
-    <div class="col-xs-2 col-xs-offset-5">
-        <input type="text" />
+<div class="container">
+    <div class="row n-form-top-buffer">
+        <div class="col-xs-8 col-xs-offset-2">
+            <input type="text" class="form-control n-form" placeholder="email">
+            <input type="text" class="form-control n-form" placeholder="password">
+        </div>
     </div>
 </div>
