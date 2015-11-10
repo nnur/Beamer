@@ -1,3 +1,61 @@
-body {
-    color: 'blue';
+/* email pwd input form*/
+.bm-form {
+    border-radius: 0;
+    border-style: none;
+    font-weight:300;
+    letter-spacing: 0.3rem;
+    margin-bottom: 3.5rem;
+    @include size(100%, 4rem);
 }
+
+.bm-logo-img {
+	margin-top: remify(70);
+}
+
+/* form top spacing*/
+.bm-form-top-buffer {
+	margin-top:15rem;
+}
+
+/* hollow btn*/
+.bm-ghost-btn {
+	background: transparent;
+	border-width: 0.2rem;
+	border-color: #FFF;
+	color: white;
+	&:hover{
+		border:none;
+		background:white;
+		color: $purple;
+	}
+}
+
+.bm-solid-btn {
+	background-color: $pink;
+	color: white;
+	border: none;
+	&:hover {
+		background: darken($pink, 5%);
+		color:white;
+	}
+}
+
+/* button */
+.btn{
+	border-radius: 0;
+	font-size: 2rem;
+	/* remove blue glow*/
+	&:focus, &:active:focus, &.active:focus {
+    	outline:none;
+    	box-shadow:none;
+	}
+	@include size(37%, 5rem);
+
+}
+
+
+/* removes blue glow*/
+.form-control:focus{
+	box-shadow: none;
+}
+

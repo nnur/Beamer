@@ -1,0 +1,9 @@
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@function remify($px){
+	$rem: $px/16;
+	@return $rem - 0rem; 
+}

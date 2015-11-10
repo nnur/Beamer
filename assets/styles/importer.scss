@@ -1,31 +1,21 @@
 @import "../assets/node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "variables";
+@import "mixins";
+@import "signup/login";
+
 body {
     background: url($bg) no-repeat fixed;
     background-size: cover;
     overflow: hidden;
+    font-size: 100px !important;
 }
 
-@mixin top-buffer() {
-	margin-top: 2rem;
+:root {
+font-size: 16px;
 }
 
-.n-form {
-	@include top-buffer();
-    border-radius: 0;
-    font-family: $font-stack;
-    font-weight:300;
-    letter-spacing: 2px;
-    margin-bottom: 30px;
-}
 
-.n-form-top-buffer {
-	margin-top:20px;
-}
 
-/* TODO: use rem instead of px */
-/* TODO: remove bevel from inputs */
+
 /* TODO: remove focus glow (override bootstrap for this) */
-/* TODO: prefix all classes with bm or beamer, bmr or something for namespacing */
-/* TODO: move form styling into its own file */
 /* TODO: use importer only for imports - google exactly what this means */
