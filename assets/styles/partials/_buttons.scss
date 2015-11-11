@@ -21,7 +21,7 @@
 }
 
 /* solid pink btn*/
-.bm-solid-btn {
+.bm-solid-btn{
 	@extend .bm-auth-btn;
 	background-color: $pink;
 	color: white;
@@ -29,7 +29,11 @@
 	&:hover  {
 		background: darken($pink, 5%);
 		color:white;
-	}	
+	}
+	&:focus{
+		@extend .bm-solid-btn;
+	}
+
 }
 
 .bm-solid-btn[disabled]{
@@ -42,6 +46,7 @@
 
 /* auth button */
 .bm-auth-btn{
+	@extend .center-block;
 	margin-top: remify(32);
 	border-radius: 0;
 	font-size: remify(20.6);
@@ -54,4 +59,12 @@
     	box-shadow:none;
 	}
 	@include size(remify(133.62), remify(55.56));
+	@media screen and (min-width: $screen-sm) {
+		@include size(remify(90), remify(49));
+		float: none!important;
+		/* Rectangle 54: */
+		opacity: 0.21;
+		background: #E1E1ED;
+
+	}
 }

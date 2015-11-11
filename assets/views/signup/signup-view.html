@@ -25,17 +25,20 @@
             </center>
         </div>
     </div>
+    <!-- FORM -->
     <form novalidate name="loginForm">
-        <!-- FORM -->
         <div class="row bm-form-top-buffer">
-            <div class="col-xs-10 col-xs-offset-1">
-                <input type="text" ng-model="user.email" placeholder="email" class="form-control bm-form" required>
-                <input type="text" ng-model="user.pwd" name='pwd' placeholder="password" class="form-control bm-form" required>
+            <div class="col-xs-10 col-sm-4 col-xs-offset-1 col-sm-offset-4">
+                <!-- ERROR -->
+                <p class="bm-login-error" ng-show="error">{{error}}</p>
+                <!-- INPUTS -->
+                <input type="email" ng-model="user.email" placeholder="email" class="form-control bm-form" required>
+                <input type="password" ng-model="user.pwd" name='pwd' placeholder="password" class="form-control bm-form" required>
             </div>
         </div>
         <!-- BUTTON -->
         <div class="row">
-            <div class="col-xs-10 col-xs-offset-1">
+            <div class="col-xs-10 col-md-4 col-xs-offset-1 col-md-offset-4">
                 <button type="button" class="btn btn-default pull-left bm-ghost-btn">SIGN UP</button>
                 <button type="button" ng-disabled="loginForm.$invalid" ng-click="login()" class="btn btn-default pull-right   bm-solid-btn">LOG IN</button>
             </div>
