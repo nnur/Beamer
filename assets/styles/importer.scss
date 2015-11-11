@@ -1,21 +1,8 @@
 @import "../assets/node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "variables";
-@import "mixins";
-@import "signup/login";
+@import "modules/variables";
+@import "modules/utilities";
+@import "partials/base";
+@import "partials/buttons";
+@import "partials/forms";
+@import "partials/icons";
 
-body {
-    background: url($bg) no-repeat fixed;
-    background-size: cover;
-    overflow: hidden;
-    font-size: 100px !important;
-}
-
-:root {
-font-size: 16px;
-}
-
-
-
-
-/* TODO: remove focus glow (override bootstrap for this) */
-/* TODO: use importer only for imports - google exactly what this means */

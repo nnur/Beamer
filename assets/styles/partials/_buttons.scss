@@ -1,0 +1,57 @@
+/* hollow btn*/
+.bm-ghost-btn {
+	@extend .bm-auth-btn;
+	background: transparent;
+	border: remify(3) solid;
+	border-color: #FFF;
+	color: white;
+	&:hover, &:active{
+		border:none!important;
+		background:white!important;
+		color: $purple!important;
+	}
+	&:focus{
+		background: transparent;
+		border: remify(3) solid;
+		border-color: #FFF;
+		color: white;
+
+	}
+	
+}
+
+/* solid pink btn*/
+.bm-solid-btn {
+	@extend .bm-auth-btn;
+	background-color: $pink;
+	color: white;
+	border: none;
+	&:hover  {
+		background: darken($pink, 5%);
+		color:white;
+	}	
+}
+
+.bm-solid-btn[disabled]{
+	background-color: $pink;
+	&:hover{
+		background-color: $pink;
+	}
+
+}
+
+/* auth button */
+.bm-auth-btn{
+	margin-top: remify(32);
+	border-radius: 0;
+	font-size: remify(20.6);
+	font-weight: 400;
+	letter-spacing: remify(3.57);
+	line-height: remify(24);
+	/* remove blue glow */
+	&:focus, &:active:focus, &.active:focus {
+    	outline:none;
+    	box-shadow:none;
+	}
+	@include size(remify(133.62), remify(55.56));
+}
