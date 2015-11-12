@@ -8,10 +8,6 @@
     margin-bottom: 2rem;
     @include size(100%, remify(50));
 	box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.50);
-
-	@media screen and (min-width: $screen-sm) {
-		@include size(remify(200.36), remify(35.71));
-	}
 }
 
 /* form top spacing*/

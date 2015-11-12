@@ -47,24 +47,20 @@
 /* auth button */
 .bm-auth-btn{
 	@extend .center-block;
+	@extend .text-center;
+	text-align: center;
 	margin-top: remify(32);
 	border-radius: 0;
-	font-size: remify(20.6);
-	font-weight: 400;
+	font-size: remify(15.6);
 	letter-spacing: remify(3.57);
-	line-height: remify(24);
+
 	/* remove blue glow */
 	&:focus, &:active:focus, &.active:focus {
     	outline:none;
     	box-shadow:none;
 	}
-	@include size(remify(133.62), remify(55.56));
+	@include size(45%, remify(55.56));
 	@media screen and (min-width: $screen-sm) {
-		@include size(remify(90), remify(49));
-		float: none!important;
-		/* Rectangle 54: */
-		opacity: 0.21;
-		background: #E1E1ED;
 
 	}
 }
