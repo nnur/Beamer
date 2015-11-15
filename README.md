@@ -10,3 +10,6 @@ A RESTful API that uses mongodb to store, manage, and transmit content straight 
 ### The Client:
 An Angular app that allows you to create, update and manage your blogs with a clean WYSIWYG editor. 
 Mocks can be seen at [invisionapp](https://invis.io/C54XSSUH7)
+
+
+![alt tag](http://puu.sh/lma3n/02591e3613.png)
