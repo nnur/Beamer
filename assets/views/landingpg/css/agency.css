@@ -64,12 +64,12 @@ h6 {
     margin: 0 auto;
 }
 
-.bg-light-gray {
-    background-color: #f7f7f7;
+.bg-white {
+    background-color: white;
 }
 
-.bg-white {
-    background-color: #ffffff;
+.bg-light-gray {
+    background-color: #f7f7f7;
 }
 
 .bg-darkest-gray {
@@ -128,16 +128,13 @@ fieldset[disabled] .btn-primary.active {
 .btn-xl {
     color: white;
     background-color: #e2e470;
-    border-radius: 0 !important;
+    border-color: #e2e470;
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 700;
+    border-radius: 3px;
     font-size: 18px;
-    padding: 10px 30px;
-}
-
-.btn-pink {
-    background-color: #D16982 !important;
+    padding: 20px 40px;
 }
 
 .btn-xl:hover,
@@ -145,8 +142,9 @@ fieldset[disabled] .btn-primary.active {
 .btn-xl:active,
 .btn-xl.active,
 .open .dropdown-toggle.btn-xl {
-    color: white !important;
+    color: white;
     background-color: #d9dc45;
+    border-color: #d8da3d;
 }
 
 .btn-xl:active,
@@ -177,11 +175,11 @@ fieldset[disabled] .btn-xl.active {
 .btn-xl .badge {
     color: #e2e470;
     background-color: white;
-    border-radius: 0;
 }
 
 .btn-xl.btn-hollow {
     background-color: #332a4b;
+    border: none;
 }
 
 .btn-xl.btn-hollow:hover {
@@ -197,8 +195,17 @@ fieldset[disabled] .btn-xl.active {
     color: white;
 }
 
+.navbar-default {
+    background-color: #262039;
+    border-color: transparent;
+}
+
+.navbar-dropdown {
+    background: white;
+}
+
 .navbar-default .navbar-brand {
-    color: #e2e470 !important;
+    color: #e2e470;
     font-family: 'phosphateinline';
     text-transform: uppercase;
     letter-spacing: 10px;
@@ -216,17 +223,16 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .navbar-default .navbar-toggle {
-    background-color: #e2e470;
-    border: none !important;
+    border: none;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-    background-color: white !important;
+    background-color: #e2e470;
 }
 
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-    background-color: #e2e470;
+    background-color: rgba(84, 66, 138, 0.37);
 }
 
 .navbar-default .nav li a {
@@ -234,25 +240,25 @@ fieldset[disabled] .btn-xl.active {
     text-transform: uppercase;
     font-weight: 400;
     letter-spacing: 1px;
-    color: white !important;
+    color: white;
 }
 
 .navbar-default .nav li a:hover,
 .navbar-default .nav li a:focus {
-    color: #e2e470;
+    color: #D16982;
     outline: none;
 }
 
 .navbar-default .navbar-nav > .active > a {
     border-radius: 0;
-    color: #e2e470;
-    background: none;
+    color: #fff7d8;
+    background: white;
 }
 
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
     border-radius: 0;
-    color: #e2e470;
+    color: #D16982;
     background: none;
 }
 
@@ -262,13 +268,12 @@ fieldset[disabled] .btn-xl.active {
 
 @media (min-width: 768px) {
     .navbar-default {
-        background-image: url('../img/header-bg.jpg');
-        /*background-color: #433860 !important;*/
-        padding: 5px 0;
+        background-color: transparent;
+        padding: 25px 0;
         -webkit-transition: padding 0.3s;
         -moz-transition: padding 0.3s;
         transition: padding 0.3s;
-        border: none !important;
+        border: none;
     }
     .navbar-default .navbar-brand {
         font-size: 2em;
@@ -278,7 +283,6 @@ fieldset[disabled] .btn-xl.active {
     }
     .navbar-default .navbar-nav > .active > a {
         border-radius: 3px;
-        color: white;
     }
     .navbar-default.navbar-shrink {
         box-shadow: 0px 5px 20px #303030;
@@ -292,6 +296,7 @@ fieldset[disabled] .btn-xl.active {
 
 header {
     background-image: url('../img/header-bg.jpg');
+    background: fixed;
     background-repeat: none;
     background-attachment: scroll;
     background-position: center center;
@@ -304,8 +309,8 @@ header {
 }
 
 header .intro-text {
-    padding-top: 100px;
-    padding-bottom: 50px;
+    padding-top: 80px;
+    padding-bottom: 139px;
 }
 
 header .intro-text .intro-lead-in {

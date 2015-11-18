@@ -1,27 +1,56 @@
-<!-- <div class="row">
-    <a href="#/signup" class="page-scroll btn btn-xl btn-hollow">Sign up</a>
-</div>
-<a href="#/signup" class="page-scroll btn btn-xl btn-hollow btn-pink">Log in</a>
- -->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    Launch demo modal
-</button>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+<div class="row">
+    <!-- login -->
+    <div id="login" class="container collapse">
+        <!-- FORM -->
+        <form novalidate name="loginForm">
+            <div class="row bm-form-top-buffer">
+                <div class="col-xs-10 col-md-4 col-xs-offset-1 col-md-offset-4">
+                    <!-- ERROR -->
+                    <p class="bm-login-error" ng-show="error">{{error}}</p>
+                    <!-- INPUTS -->
+                    <input type="email" ng-model="user.email" placeholder="email" class="form-control bm-form" required>
+                    <input type="password" ng-model="user.pwd" name='pwd' placeholder="password" class="form-control bm-form" required>
+                </div>
             </div>
-            <div class="modal-body">
-                ...
+            <!-- BUTTON -->
+            <div class="row">
+                <div class="col-xs-10 col-md-4 col-xs-offset-1 col-md-offset-4">
+                    <button type="button" data-toggle="collapse" data-target="#login" class="btn btn-default pull-left bm-ghost-btn" ng-click="showButt=true">Cancel</button>
+                    <button type="button" ng-disabled="loginForm.$invalid" ng-click="login()" class="btn btn-default pull-right bm-solid-btn">LOG IN</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+        </form>
+    </div>
+    <!-- signup -->
+    <div id="signup" class="container collapse">
+        <form novalidate name="signupForm">
+            <div class="row bm-form-top-buffer">
+                <div class="col-xs-10 col-md-4 col-xs-offset-1 col-md-offset-4">
+                    <!-- ERROR -->
+                    <p class="bm-login-error" ng-show="error">{{error}}</p>
+                    <!-- INPUTS -->
+                    <input type="email" ng-model="user.newEmail" placeholder="email" class="form-control bm-form" required/>
+                    <input type="password" ng-model="user.pwd1" name='uPwd' placeholder="password" class="form-control bm-form" required ng-minlength="6" ng-maxlength="40" />
+                    <input type="password" ng-model="user.pwd2" required placeholder="confirm password" class="form-control bm-form" ng-minlength="6" ng-maxlength="40" />
+                    <!-- BUTTONS -->
+                    <button type="button" data-toggle="collapse" data-target="#signup" class="btn btn-default bm-ghost-btn pull-left" ng-click="showButt=true">Cancel</button>
+                    <button ng-disabled="signupForm.$invalid" ng-click="signup()" class="btn btn-default bm-solid-btn pull-right">SIGN UP</button>
+                    <br>
+                    <!-- ERRORS -->
+                    <span ng-show="signupForm.uPwd.$error.minlength">password less than 6 chars.</span>
+                    <span ng-show="signupForm.uPwd.$error.maxlength">password longer than 40 chars.</span>
+                </div>
             </div>
+        </form>
+    </div>
+    <!-- FORM TOGGLE BUTTONS -->
+    <div class="row bm-form-top-buffer">
+        <div class="col-xs-10 col-md-4 col-xs-offset-1 col-md-offset-4">
+            <!-- buttons -->
+            <button type="button" class="btn bm-ghost-btn pull-left" data-toggle="collapse" data-target="#signup" ng-show="showButt" ng-click="showButt=false">
+                Sign up</button>
+            <button type="button" class="btn bm-solid-btn pull-right" data-toggle="collapse" data-target="#login" ng-show="showButt" ng-click="showButt=false">Log in</button>
+            <!-- buttons -->
         </div>
     </div>
 </div>

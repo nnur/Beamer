@@ -2,7 +2,7 @@
 .bm-ghost-btn {
 	@extend .bm-auth-btn;
 	background: transparent;
-	border: remify(3) solid;
+	border: remify(2) solid;
 	border-color: #FFF;
 	color: white;
 	&:hover, &:active{
@@ -18,6 +18,11 @@
 
 	}
 	
+}
+
+.collapsing {
+    -webkit-transition: none;
+    transition: none;
 }
 
 /* solid pink btn*/
@@ -49,17 +54,19 @@
 	@extend .center-block;
 	@extend .text-center;
 	text-align: center;
-	margin-top: remify(32);
 	border-radius: 0;
 	font-size: remify(15.6);
 	letter-spacing: remify(3.57);
+	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
 
 	/* remove blue glow */
 	&:focus, &:active:focus, &.active:focus {
     	outline:none;
     	box-shadow:none;
 	}
-	@include size(45%, remify(55.56));
+	@include size(40%, remify(55.56));
 	@media screen and (min-width: $screen-sm) {
 
 	}

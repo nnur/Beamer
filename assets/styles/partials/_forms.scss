@@ -5,14 +5,9 @@
     border-style: none;
     font-weight:300;
     letter-spacing: 0.3rem;
-    margin-bottom: 2rem;
-    @include size(100%, remify(50));
+    margin-bottom: 1rem;
+    @include size(100%, remify(40));
 	box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.50);
-}
-
-/* form top spacing*/
-.bm-form-top-buffer {
-	margin-top:remify(36);
 }
 
 /* removes blue glow*/

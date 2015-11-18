@@ -2,7 +2,7 @@ angular.module('beamer.controllers.signup', [])
 
 .controller('SignupController', ["$scope", "auth", "$location",
     function($scope, auth, $location) {
-
+        $scope.showButt = true;
         // Creates user obj with form info and sends it off for authentication.
         $scope.signup = function() {
             if ($scope.user.pwd1 === $scope.user.pwd2) {
