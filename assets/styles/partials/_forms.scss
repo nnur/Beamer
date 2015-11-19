@@ -6,11 +6,24 @@
     font-weight:300;
     letter-spacing: 0.3rem;
     margin-bottom: 1rem;
-    @include size(100%, remify(40));
-	box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.50);
+    @include size(remify(301), remify(45));
+	
+
+	background-color: transparent;
+    color: #eeeeee;
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #eeeeee 2px;
+
+   
 }
 
 /* removes blue glow*/
 .form-control:focus{
 	box-shadow: none;
+	outline: none;
+    outline-style: none;
 }
