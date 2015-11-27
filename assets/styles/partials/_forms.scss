@@ -1,29 +1,40 @@
 /* email pwd input form*/
-.bm-form {
-	@extend .center-block;
+%bm-input {
     border-radius: 0;
     border-style: none;
     font-weight:300;
+    font-family: $font-roboto;
     letter-spacing: 0.3rem;
-    margin-bottom: 1rem;
-    @include size(remify(301), remify(45));
-	
 
+    /* makes a clear bg, underlined input */
 	background-color: transparent;
-    color: #eeeeee;
+    color: $white;
     outline: none;
     outline-style: none;
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: solid #eeeeee 2px;
-
-   
+    border-bottom: solid $white 2px;  
 }
 
-/* removes blue glow*/
-.form-control:focus{
-	box-shadow: none;
-	outline: none;
-    outline-style: none;
+.bm-input-group {
+    $form-width: 301;
+    @extend .center-block;
+
+    input {
+        @extend %bm-input;
+        @include size(remify($form-width), remify(45));
+        margin-bottom: 1rem;
+    }
+    .bm-login-error {
+        @extend .center-block;
+        @extend .bm-alert-error;
+        width: remify($form-width);
+    }
+    @include placeholder {
+        color: white;
+    }
+    margin-bottom: 1.5rem;
 }
+
+

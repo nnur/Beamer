@@ -3,15 +3,19 @@
     <div id="login" class="container collapse">
         <!-- FORM -->
         <form novalidate name="loginForm">
-            <div class="row">
+            <div class="row bm-input-group">
                 <!-- ERROR -->
-                <p class="bm-login-error" ng-show="error">{{error}}</p>
+                <p class="bm-login-error" ng-show="error">
+                    <span class="glyphicon glyphicon-exclamation-sign">
+                        {{error}}    
+                    </span>
+                </p>
                 <!-- INPUTS -->
-                <input type="email" ng-model="user.email" placeholder="email" class="form-control bm-form" required>
-                <input type="password" ng-model="user.pwd" name='pwd' placeholder="password" class="form-control bm-form" required>
+                <input type="email" ng-model="user.email" placeholder="email" required>
+                <input type="password" ng-model="user.pwd" name='pwd' placeholder="password" required>
             </div>
             <!-- BUTTON -->
-            <div class="row">
+            <div class="btn-group">
                 <button type="button" data-toggle="collapse" data-target="#login" class="btn btn-default bm-ghost-btn" ng-click="showButt=true">Cancel</button>
                 <button type="button" ng-disabled="loginForm.$invalid" ng-click="login()" class="btn btn-default bm-solid-btn">LOG IN</button>
             </div>
@@ -20,23 +24,25 @@
     <!-- signup -->
     <div id="signup" class="container collapse">
         <form novalidate name="signupForm">
-            <div class="row">
+            <div class="row bm-input-group">
                 <!-- ERROR -->
                 <p class="bm-login-error" ng-show="error">{{error}}</p>
                 <!-- INPUTS -->
-                <input type="email" ng-model="user.newEmail" placeholder="email" class="form-control bm-form" required/>
-                <input type="password" ng-model="user.pwd1" name='uPwd' placeholder="password" class="form-control bm-form" required ng-minlength="6" ng-maxlength="40" />
-                <input type="password" ng-model="user.pwd2" required placeholder="confirm password" class="form-control bm-form" ng-minlength="6" ng-maxlength="40" />
-                <!-- BUTTONS -->
-                <div class="btn-group">
-                    <button type="button" data-toggle="collapse" data-target="#signup" class="btn btn-default bm-ghost-btn" ng-click="showButt=true">Cancel</button>
-                    <button ng-disabled="signupForm.$invalid" ng-click="signup()" class="btn btn-default bm-solid-btn">SIGN UP</button>
-                </div>
-                <br>
-                <!-- ERRORS -->
+                <input type="email" ng-model="user.newEmail" placeholder="email" required/>
+                <input type="password" ng-model="user.pwd1" name='uPwd' placeholder="password" required ng-minlength="6" ng-maxlength="40" />
+                <input type="password" ng-model="user.pwd2" required placeholder="confirm password" ng-minlength="6" ng-maxlength="40" />
+            </div>
+            <!-- ERRORS -->
+            <div class="row bm-error-bar">
                 <span ng-show="signupForm.uPwd.$error.minlength">password less than 6 chars.</span>
                 <span ng-show="signupForm.uPwd.$error.maxlength">password longer than 40 chars.</span>
             </div>
+            <!-- BUTTONS -->
+            <div class="btn-group">
+                <button type="button" data-toggle="collapse" data-target="#signup" class="btn btn-default bm-ghost-btn" ng-click="showButt=true">Cancel</button>
+                <button ng-disabled="signupForm.$invalid" ng-click="signup()" class="btn btn-default bm-solid-btn">SIGN UP</button>
+            </div>
+            <br>
         </form>
     </div>
     <!-- FORM TOGGLE BUTTONS -->

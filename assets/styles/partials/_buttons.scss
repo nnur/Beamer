@@ -11,7 +11,7 @@
 		background:white!important;
 		color: $purple!important;
 	}
-	&:focus{
+	&:focus {
 		background: transparent;
 		border: remify(3) solid;
 		border-color: #FFF;
@@ -27,22 +27,22 @@
 }
 
 /* solid pink btn*/
-.bm-solid-btn{
+.bm-solid-btn {
 	@extend .bm-auth-btn;
 	background-color: $pink;
 	color: white;
 	border: none;
 	margin-left: 35px; 
 	&:hover  {
-		background: darken($pink, 5%);
+		background: $dark-pink;
 		color:white;
 	}
 	&:focus{
 		@extend .bm-solid-btn;
+		background: $dark-pink;
 	}
-
 }
-
+ 	
 .bm-solid-btn[disabled]{
 	background-color: $pink;
 	&:hover{
@@ -59,7 +59,7 @@
 	border-radius: 0;
 	font-size: remify(15.6);
 	letter-spacing: remify(3.57);
-	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: $font-montserrat;
     text-transform: uppercase;
     font-weight: 700;
 
