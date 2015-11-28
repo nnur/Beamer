@@ -1,0 +1,24 @@
+.bm-alert-error {
+	$vertical-padding: 5;
+
+	padding-top: remify($vertical-padding);
+	padding-bottom: remify($vertical-padding);
+
+	font-family: $font-roboto;
+	letter-spacing: remify(1.5);
+	color: $pink;
+	background: $dark-purple; 
+	border-radius: remify(2);
+}
+.bm-gentle-reminder {
+	$vertical-padding: 5;
+
+	padding-top: remify($vertical-padding);
+	padding-bottom: remify($vertical-padding);
+
+	font-family: $font-roboto;
+	letter-spacing: remify(1.5);
+	color: #F3ED7C;
+	background: none; 
+	border-radius: remify(2);
+}

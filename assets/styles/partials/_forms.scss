@@ -1,25 +1,25 @@
 /* email pwd input form*/
-%bm-input {
-    border-radius: 0;
-    border-style: none;
-    font-weight:300;
-    font-family: $font-roboto;
-    letter-spacing: 0.3rem;
 
-    /* makes a clear bg, underlined input */
-	background-color: transparent;
-    color: $white;
-    outline: none;
-    outline-style: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: solid $white 2px;  
+.bm-btn-group {
+    margin-top: remify(15);
+    @extend .center-block;
+    display: flex;
+    layout-direction: row;
+    justify-content: space-between;
+    width: remify($form-width);
 }
 
-.bm-input-group {
-    $form-width: 301;
-    @extend .center-block;
+.bm-form-group {
+
+    .bm-btn-group {
+        margin-top: remify(15);
+        @extend .center-block;
+        display: flex;
+        layout-direction: row;
+        justify-content: space-between;
+
+        width: remify($form-width);
+    }
 
     input {
         @extend %bm-input;
@@ -31,10 +31,29 @@
         @extend .bm-alert-error;
         width: remify($form-width);
     }
+
     @include placeholder {
         color: white;
     }
+
     margin-bottom: 1.5rem;
 }
 
+%bm-input {
+    @extend .center-block;
+    border-radius: 0;
+    border-style: none;
+    font-weight:300;
+    font-family: $font-roboto;
+    letter-spacing: 0.3rem;
 
+    /* makes a clear bg, underlined input */
+    background-color: transparent;
+    color: $white;
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid $white 2px;  
+}

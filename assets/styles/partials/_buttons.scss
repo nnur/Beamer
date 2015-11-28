@@ -1,11 +1,10 @@
 /* hollow btn*/
 .bm-ghost-btn {
-	@extend .bm-auth-btn;
+	@extend %bm-auth-btn;
 	background: transparent;
 	border: remify(2) solid;
 	border-color: #FFF;
 	color: white;
-	margin-right: 35px; 
 	&:hover, &:active{
 		border:none!important;
 		background:white!important;
@@ -16,9 +15,7 @@
 		border: remify(3) solid;
 		border-color: #FFF;
 		color: white;
-
 	}
-	
 }
 
 .collapsing {
@@ -28,11 +25,10 @@
 
 /* solid pink btn*/
 .bm-solid-btn {
-	@extend .bm-auth-btn;
+	@extend %bm-auth-btn;
 	background-color: $pink;
 	color: white;
 	border: none;
-	margin-left: 35px; 
 	&:hover  {
 		background: $dark-pink;
 		color:white;
@@ -52,8 +48,7 @@
 }
 
 /* auth button */
-.bm-auth-btn{
-	@extend .center-block;
+%bm-auth-btn{
 	@extend .text-center;
 	text-align: center;
 	border-radius: 0;
@@ -65,11 +60,7 @@
 
 	/* remove blue glow */
 	&:focus, &:active:focus, &.active:focus {
-    	outline:none;
-    	box-shadow:none;
+  		@extend %bm-no-glow;
 	}
 	@include size(remify(133), remify(55.56));
-	@media screen and (min-width: $screen-sm) {
-
-	}
 }
