@@ -71,8 +71,5 @@ describe('SignupController', function() {
             expect(resolvedValue).toEqual(123);
         });
 
-
-
-
     });
 });

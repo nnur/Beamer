@@ -1,6 +1,6 @@
 var
     jwt = require('jsonwebtoken'),
-    tokenSecret = "moresexwithgoats";
+    tokenSecret = "notactualsecret";
 
 // Generates a token from supplied payload
 module.exports.issue = function(payload) {

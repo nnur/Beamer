@@ -1,17 +1,20 @@
 app = angular.module('beamer', ['beamer.controllers.profile', 'beamer.controllers.signup',
-    'beamer.auth', 'beamer.session', 'ngFileUpload', 'ngRoute', 'angular-jwt'
+    'beamer.auth', 'beamer.session', 'beamer.directives.loginForm',
+    'ngFileUpload', 'ngRoute', 'angular-jwt', 'smoothScroll'
 ]);
 
 app.config(function($httpProvider, jwtInterceptorProvider) {
     // Send a jwt on all http requests
-    jwtInterceptorProvider.tokenGetter = ['session', function(session) {
-        return session.token;
-    }];
+    jwtInterceptorProvider.tokenGetter = ['session',
+        function(session) {
+            return session.token;
+        }
+    ];
     $httpProvider.interceptors.push('jwtInterceptor');
 });
 
 // Routes which don't require jwts to access
-app.constant('unprotected', ['/signup']);
+app.constant('unprotected', ['/signup', '/poop']);
 
 app.run(function($rootScope, $location, auth, unprotected) {
 
@@ -21,8 +24,9 @@ app.run(function($rootScope, $location, auth, unprotected) {
     };
 
     $rootScope.$on('$routeChangeStart', function() {
-        if (isRouteProtected($location.url()) && !auth.isAuthenticated()) {
-            $location.path('/signup');
-        }
+        // if (isRouteProtected($location.url()) && !auth.isAuthenticated()) {
+        //     $location.path('/signup');
+        // }
+
     });
 });

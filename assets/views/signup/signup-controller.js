@@ -2,7 +2,9 @@ angular.module('beamer.controllers.signup', [])
 
 .controller('SignupController', ["$scope", "auth", "$location",
     function($scope, auth, $location) {
-
+        $scope.showButt = true;
+        $scope.login = {};
+        $scope.signup = {};
         // Creates user obj with form info and sends it off for authentication.
         $scope.signup = function() {
             if ($scope.user.pwd1 === $scope.user.pwd2) {
@@ -14,7 +16,7 @@ angular.module('beamer.controllers.signup', [])
 
 
             } else {
-                $scope.error = "passwords don't match";
+                $scope.signup.error = "passwords don't match";
             }
         };
 
@@ -38,7 +40,7 @@ angular.module('beamer.controllers.signup', [])
 
             for (var i = 0; i < length; i++) {
                 if (errors[i] == 'email') {
-                    $scope.error = errorObj.invalidAttributes.email[0].message;
+                    $scope.signup.error = errorObj.invalidAttributes.email[0].message;
                 }
             }
         }
@@ -50,7 +52,7 @@ angular.module('beamer.controllers.signup', [])
 
         // Adds the login error to the scope to be shown
         function loginError(res) {
-            $scope.error = res.data.err;
+            $scope.login.error = res.data.err;
         }
 
         // A successful login routes view to profile

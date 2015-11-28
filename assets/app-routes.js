@@ -9,5 +9,7 @@ app.config(function($routeProvider) {
             templateUrl: 'views/signup/signup-view.html',
             controller: 'SignupController'
         })
-        .otherwise('/signup');
+        .when('/', {
+            templateUrl: 'views/landingpg/landing-view.html'
+        });
 });
