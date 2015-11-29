@@ -7,7 +7,7 @@ describe('auth service', function() {
 
     beforeEach(function() {
         angular.module('angular-jwt', []);
-        module('beamer.auth');
+        module('beamer.common.auth');
     });
 
     beforeEach(function() {

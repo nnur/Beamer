@@ -44,17 +44,20 @@
     <script src="views/landingpg/js/classie.js"></script>
     <script src="views/landingpg/js/cbpAnimatedHeader.js"></script>
     <script src="views/landingpg/js/agency.js"></script>
-    <!-- CONTROLLERS -->
+    <!-- PROFILE -->
     <script type="text/javascript" src="views/profile/profile-controller.js"></script>
-    <script type="text/javascript" src="views/signup/signup-controller.js"></script>
+    <!-- LOGIN -->
+    <script type="text/javascript" src="common/login/login-directive.js"></script>
+    <script type="text/javascript" src="common/login/login-controller.js"></script>
+    <script type="text/javascript" src="common/login/login.js"></script>
+    <!-- AUTH SERVICES -->
+    <script type="text/javascript" src="common/session/session-service.js"></script>
+    <script type="text/javascript" src="common/auth/auth-service.js"></script>
+    <!-- SIDEBAR DIRECTIVE -->
+    <script type="text/javascript" src="common/sidebar/sidebar-directive.js"></script>
     <!-- MAIN APP FILES -->
     <script type="text/javascript" src="app-module.js"></script>
     <script type="text/javascript" src="app-routes.js"></script>
-    <!-- SERVICES -->
-    <script type="text/javascript" src="services/session-service.js"></script>
-    <script type="text/javascript" src="services/auth-service.js"></script>
-    <!-- DIRECTIVES -->
-    <script type="text/javascript" src="common/login-directive.js"></script>
     <!-- this is where content will be injected -->
     <div ng-view>
     </div>

@@ -1,0 +1,36 @@
+$bm-sidebar-width: 250px;
+
+#bm-sidebar {
+    z-index: 1000;
+    position: fixed;
+    left: 0;
+    width: $bm-sidebar-width;
+    height: 100%;
+    margin-left: -$bm-sidebar-width;
+    overflow-y: auto;
+    background: url($bg);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+    @media(min-width:768px) {
+    	transform: translate3D(100%, 0, 0);
+    }
+}
+
+.bm-right-panel {
+    width: 100%;
+    position: relative;
+}
+
+#bm-sidebar-wrapper {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+    @media(min-width:768px) {
+    	padding-left: $bm-sidebar-width;
+    }
+}

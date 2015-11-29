@@ -1,13 +1,11 @@
 describe('session service', function() {
 
-
-
     var session, jwtHelper;
 
     beforeEach(function() {
 
         angular.module('angular-jwt', []);
-        module('beamer.session');
+        module('beamer.common.session');
 
         module(function($provide) {
             jwtHelper = {};

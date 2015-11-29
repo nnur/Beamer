@@ -1,5 +1,5 @@
-app = angular.module('beamer', ['beamer.controllers.profile', 'beamer.controllers.signup',
-    'beamer.auth', 'beamer.session', 'beamer.directives.loginForm',
+app = angular.module('beamer', ['beamer.views.profile', 'beamer.common.login',
+    'beamer.common.auth', 'beamer.common.session', 'beamer.common.sidebar',
     'ngFileUpload', 'ngRoute', 'angular-jwt', 'smoothScroll'
 ]);
 
@@ -27,6 +27,5 @@ app.run(function($rootScope, $location, auth, unprotected) {
         // if (isRouteProtected($location.url()) && !auth.isAuthenticated()) {
         //     $location.path('/signup');
         // }
-
     });
 });

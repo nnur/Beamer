@@ -1,9 +1,9 @@
-describe('SignupController', function() {
+describe('LoginController', function() {
 
     var auth, deferred, controller, $scope, rootScope;
 
     beforeEach(function() {
-        module('beamer.controllers.signup');
+        module('beamer.common.login');
     });
 
     beforeEach(function() {
@@ -25,7 +25,7 @@ describe('SignupController', function() {
     beforeEach(inject(function(_$controller_, _auth_, $rootScope, $q) {
         $scope = {};
         $controller = _$controller_;
-        controller = $controller('SignupController', {
+        controller = $controller('LoginController', {
             $scope: $scope
         });
         rootScope = $rootScope;

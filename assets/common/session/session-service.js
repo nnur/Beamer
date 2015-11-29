@@ -1,4 +1,4 @@
-angular.module('beamer.session', ['angular-jwt'])
+angular.module('beamer.common.session', ['angular-jwt'])
     .service('session', ['jwtHelper', function(jwtHelper) {
 
         // Extracts token information and saves it in the session

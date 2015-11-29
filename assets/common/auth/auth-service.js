@@ -1,4 +1,4 @@
-angular.module('beamer.auth', ['beamer.session'])
+angular.module('beamer.common.auth', ['beamer.common.session'])
 
 .service('auth', ['$http', 'session', '$q',
     function($http, session, $q) {
