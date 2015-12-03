@@ -1,6 +1,7 @@
-app = angular.module('beamer', ['beamer.views.profile', 'beamer.common.login',
+app = angular.module('beamer', ['beamer.views.edit', 'beamer.common.login',
     'beamer.common.auth', 'beamer.common.session', 'beamer.common.sidebar',
-    'ngFileUpload', 'ngRoute', 'angular-jwt', 'smoothScroll'
+    'beamer.common.routeListItem', 'ngFileUpload', 'ngRoute',
+    'angular-jwt', 'smoothScroll'
 ]);
 
 app.config(function($httpProvider, jwtInterceptorProvider) {

@@ -3,7 +3,8 @@ module.exports = function(grunt) {
     grunt.config.set('sass', {
         dev: {
             options: {
-                sourcemap: 'none'
+                sourcemap: 'none',
+                update: true
             },
             files: [{
                 expand: true,

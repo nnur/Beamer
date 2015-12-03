@@ -15,19 +15,17 @@ module.exports = {
         email: {
             type: 'email',
             required: 'true',
-            unique: true // Yes unique one
+            unique: true
         },
-
-
         encryptedPassword: {
             type: 'string'
         },
-
         blogs: {
-
-            type: 'array',
-
-
+            type: 'array'
+        },
+        routes: {
+            collection: 'route',
+            via: 'owner'
         },
         // We don't wan't to send back encrypted password either
         toJSON: function() {
@@ -39,9 +37,22 @@ module.exports = {
     },
     // Here we encrypt password before creating a User
     beforeCreate: function(values, next) {
-
         values.encryptedPassword = bcrypt.hashSync(values.password);
         next();
+    },
+
+    afterDestroy: function(deletedUsers, next) {
+        if (_.has(deletedUsers[0], 'id')) {
+            Route.destroy({
+                owner: deletedUsers[0].id
+            }).exec(function(err, deleted) {
+                if (err) {
+                    console.log(err);
+                } else if (deleted) {
+                    console.log(deleted);
+                }
+            });
+        }
     },
 
     comparePassword: function(password, user, cb) {
@@ -50,6 +61,5 @@ module.exports = {
         } else { //err
             cb(true);
         }
-
     }
 };

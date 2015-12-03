@@ -1,105 +1,93 @@
- module.exports.addBlog = function(id, blog, cb) {
+module.exports.addBlog = function(id, blog, cb) {
 
-     User.findOne({
-         id: id
-     }, function(err, user) {
+    User.findOne({
+        id: id
+    }, function(err, user) {
 
-         if (err) {
+        if (err) {
 
-             cb(null, err);
-         } else if (user) {
+            cb(null, err);
+        } else if (user) {
 
-             if (!user.blogs) {
-                 user.blogs = [];
-             }
-
-
-             user.blogs.push(blog);
-
-             user.save(function(err) {
-                 if (err) {
-
-                     cb(null, err);
-
-                 }
-
-                 cb(blog, null);
-             });
-         }
-
-     });
- }
+            if (!user.blogs) {
+                user.blogs = [];
+            }
 
 
- module.exports.deleteBlog = function(userid, blogid) {
-     User.findOne({
-         id: userid
-     }, function(err, user) {
+            user.blogs.push(blog);
+
+            user.save(function(err) {
+                if (err) {
+
+                    cb(null, err);
+
+                }
+
+                cb(blog, null);
+            });
+        }
+
+    });
+};
 
 
-         if (err) {
-             res.send(err);
-
-         } else {
-
-             var size = user.blogs.length;
-
-             for (var i = 0; i < size; i++) {
-
-                 if (blogid == user.blogs[i]) {
-
-                     user.blogs.splice(i, 1);
+module.exports.deleteBlog = function(userid, blogid) {
+    User.findOne({
+        id: userid
+    }, function(err, user) {
 
 
-                     user.save(function(err) {
-                         if (err) {
+        if (err) {
+            res.send(err);
 
-                             res.send(err);
+        } else {
 
-                         } else {
-                             res.send(user);
-                         }
+            var size = user.blogs.length;
 
+            for (var i = 0; i < size; i++) {
 
-                     });
-                 }
-             }
+                if (blogid == user.blogs[i]) {
 
-         }
-
-     });
-     //end
- }
+                    user.blogs.splice(i, 1);
 
 
- //sends over one blog
- module.exports.getBlog = function(userid, blogid, cb) {
+                    user.save(function(err) {
+                        if (err) {
 
-     User.findOne({
-         id: userid
-     }, function(err, user) {
+                            res.send(err);
 
-         if (err) {
-             cb(null, err);
-         } else if (user) {
+                        } else {
+                            res.send(user);
+                        }
+                    });
+                }
+            }
+        }
+    });
+    //end
+};
 
-             if (!user.blogs) {
-                 user.blogs = [];
 
-             }
+//sends over one blog
+module.exports.getBlog = function(userid, blogid, cb) {
 
+    User.findOne({
+        id: userid
+    }, function(err, user) {
 
-             var size = user.blogs.length;
+        if (err) {
+            cb(null, err);
+        } else if (user) {
+            if (!user.blogs) {
+                user.blogs = [];
+            }
 
-             for (var i = 0; i < size; i++) {
-
-                 if (user.blogs[i].id == blogid) {
-                     cb(user.blogs[i], null);
-                 }
-             }
-
-         }
-
-     });
-
- }
+            var size = user.blogs.length;
+            for (var i = 0; i < size; i++) {
+                if (user.blogs[i].id == blogid) {
+                    cb(user.blogs[i], null);
+                }
+            }
+        }
+    });
+};

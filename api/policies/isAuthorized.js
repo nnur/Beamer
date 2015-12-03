@@ -30,6 +30,7 @@ module.exports = function(req, res, next) {
             err: 'Invalid Token!'
         });
         req.token = token; // This is the decrypted token or the payload you provided
+        //TODO: COMPARE DECRYPTED TOKEN TO REQ.PARAM(USERID)
         next();
     });
 };

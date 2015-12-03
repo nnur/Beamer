@@ -1,5 +1,4 @@
-var
-    jwt = require('jsonwebtoken'),
+var jwt = require('jsonwebtoken'),
     tokenSecret = "notactualsecret";
 
 // Generates a token from supplied payload
@@ -8,7 +7,7 @@ module.exports.issue = function(payload) {
         payload,
         tokenSecret, // Token Secret that we sign it with
         {
-            expiresIn: 180 // Token Expire time
+            expiresIn: 99999 // Token Expire time
         }
     );
 };

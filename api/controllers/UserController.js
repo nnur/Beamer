@@ -5,7 +5,6 @@
  for managing Users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-
 var bcrypt = require('bcrypt');
 
 module.exports = {
@@ -68,18 +67,54 @@ module.exports = {
                 });
             }
         });
+    },
 
+    updateEmail: function(req, res) {
+        User.update({
+            id: req.param('userid')
+        }, {
+            email: req.body.email
+        }).then(function(updated) {
+            res.send(updated);
+        }).catch(function(err) {
+            res.send(err);
+        });
     },
 
     deleteUser: function(req, res) {
-        var userid = req.token.id;
-
+        console.log('in deleteUser');
         User.destroy({
-            id: userid
-        }).exec(function deleteCB(err) {
-            res.send('user has been deleted');
+            id: req.param('userid')
+        }).then(function(deleted) {
+            res.send(deleted);
+        }).catch(function(err) {
+            res.send(err);
         });
+    },
 
+    getUser: function(req, res) {
+
+        User.findOne({
+            id: req.param('userid')
+        }, function(err, user) {
+            if (err) {
+                res.send(err);
+            } else if (user) {
+                res.send(user);
+            }
+        });
+    },
+
+    // Custome Route - gets the routes for a specific user
+    getRoutes: function(req, res) {
+        User.findOne({
+            id: req.param('userid')
+        }).populate('routes').exec(function(err, data) {
+            if (data) {
+                res.send(data);
+            } else if (err) {
+                res.send(err);
+            }
+        });
     }
-
 };

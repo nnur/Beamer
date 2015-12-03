@@ -3,16 +3,17 @@ $bm-sidebar-width: 250px;
 #bm-sidebar {
     z-index: 1000;
     position: fixed;
-    left: 0;
+    left: 0px;
+    top: 0px;
     width: $bm-sidebar-width;
     height: 100%;
     margin-left: -$bm-sidebar-width;
     overflow-y: auto;
     background: url($bg);
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    -webkit-transition: transform 0.5s ease;
+    -moz-transition: transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
+    transition: transform 0.5s ease;
 
     @media(min-width:768px) {
     	transform: translate3D(100%, 0, 0);
@@ -24,7 +25,7 @@ $bm-sidebar-width: 250px;
     position: relative;
 }
 
-#bm-sidebar-wrapper {
+#bm-page-wrapper {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
