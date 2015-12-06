@@ -7,15 +7,32 @@
 
 module.exports = {
 
-
+    // _config: {
+    //     rest: true,
+    //     populate: false,
+    //     restPrefix: '/user/:userid/route/:routeid/',
+    //     pluralize: true,
+    // },
     // -----------CRUDDIN'-----------
-
+    getBlogs: function(req, res) {
+        Blog.find({
+            owner: req.param('routename'),
+            author: req.param('username')
+        }, function(err, blog) {
+            if (err) {
+                res.send(err);
+            } else if (user) {
+                res.send(blog);
+            }
+        });
+    },
     createBlog: function(req, res) {
 
         var blog = {
             title: req.body.title,
             text: req.body.text,
-            owner: req.param('routeid')
+            owner: req.param('routename'),
+            author: req.param('username')
         };
         Blog.create(blog).then(function(data) {
             res.send(data);

@@ -5,9 +5,14 @@ app.config(function($routeProvider) {
             templateUrl: 'views/edit/edit-view.html',
             controller: 'EditController'
         })
-        .when('/profile', {
+        .when('/profile/:id', {
             templateUrl: 'views/profile/profile-view.html',
-            controller: 'ProfileController'
+            controller: 'ProfileController',
+            resolve: {
+                lemmons: function($route) {
+                    return $route;
+                }
+            }
         })
         .when('/', {
             templateUrl: 'views/landingpg/landing-view.html'

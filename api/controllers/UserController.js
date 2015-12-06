@@ -9,6 +9,10 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
 
+    actionForbidden: function(req, res) {
+        res.forbidden();
+    },
+
     signup: function(req, res) {
 
         User.create(req.body).exec(function(err, user) {
@@ -32,7 +36,6 @@ module.exports = {
 
     login: function(req, res) {
 
-
         var email = req.param('email');
         var password = req.param('password');
 
@@ -53,7 +56,7 @@ module.exports = {
 
                 User.comparePassword(password, user, function(err) {
                     if (err) {
-                        return res.json(401, {
+                        return res.json(409, {
                             err: 'invalid password'
                         });
                     } else {
@@ -71,7 +74,7 @@ module.exports = {
 
     updateEmail: function(req, res) {
         User.update({
-            id: req.param('userid')
+            username: req.param('username')
         }, {
             email: req.body.email
         }).then(function(updated) {
@@ -82,9 +85,8 @@ module.exports = {
     },
 
     deleteUser: function(req, res) {
-        console.log('in deleteUser');
         User.destroy({
-            id: req.param('userid')
+            username: req.param('username')
         }).then(function(deleted) {
             res.send(deleted);
         }).catch(function(err) {
@@ -95,25 +97,12 @@ module.exports = {
     getUser: function(req, res) {
 
         User.findOne({
-            id: req.param('userid')
+            username: req.param('username')
         }, function(err, user) {
             if (err) {
                 res.send(err);
             } else if (user) {
                 res.send(user);
-            }
-        });
-    },
-
-    // Custome Route - gets the routes for a specific user
-    getRoutes: function(req, res) {
-        User.findOne({
-            id: req.param('userid')
-        }).populate('routes').exec(function(err, data) {
-            if (data) {
-                res.send(data);
-            } else if (err) {
-                res.send(err);
             }
         });
     }

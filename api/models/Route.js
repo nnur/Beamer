@@ -3,7 +3,7 @@ module.exports = {
     schema: true,
 
     attributes: {
-        name: {
+        routename: {
             type: 'text',
             required: true,
             unique: true
@@ -18,9 +18,9 @@ module.exports = {
     },
 
     afterDestroy: function(deletedRoutes, next) {
-        if (_.has(deletedRoutes[0], 'id')) {
+        if (_.has(deletedRoutes[0], 'routename')) {
             Blog.destroy({
-                owner: deletedRoutes[0].id
+                owner: deletedRoutes[0].routename
             }).exec(function(err, deleted) {
                 if (err) {
                     console.log(err);
@@ -29,5 +29,9 @@ module.exports = {
                 }
             });
         }
+        next();
+    },
+    getRoutes: function() {
+
     }
 };

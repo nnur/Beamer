@@ -30,7 +30,18 @@ module.exports = function(req, res, next) {
             err: 'Invalid Token!'
         });
         req.token = token; // This is the decrypted token or the payload you provided
-        //TODO: COMPARE DECRYPTED TOKEN TO REQ.PARAM(USERID)
+        var userid;
+        //extract the user id from the params in a dumb way cause sails
+        if (_.isUndefined(req.param('userid'))) {
+            userid = _.isUndefined(req.param('parentid')) ? req.param('id') : req.param('parentid');
+        } else {
+            userid = req.param('userid');
+        }
+        // if (req.token.id != userid) {
+        //     return res.json(401, {
+        //         err: 'Token mismatch!'
+        //     });
+        // }
         next();
     });
 };

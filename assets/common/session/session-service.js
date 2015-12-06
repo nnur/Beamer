@@ -4,7 +4,8 @@ angular.module('beamer.common.session', ['angular-jwt'])
         // Extracts token information and saves it in the session
         this.create = function(token) {
             this.expDate = jwtHelper.getTokenExpirationDate(token);
-            this.userid = jwtHelper.decodeToken(token).id;
+            // this.userid = jwtHelper.decodeToken(token).id;
+            this.userid = '566135093d2411aff5c123e8';
             this.token = token;
         };
 

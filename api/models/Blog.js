@@ -22,6 +22,9 @@ module.exports = {
         },
         owner: {
             model: 'route'
+        },
+        author: {
+            type: 'string'
         }
     }
 };

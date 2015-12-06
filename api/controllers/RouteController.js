@@ -6,13 +6,29 @@
  */
 
 module.exports = {
-    /**
-     * `RouteController.create()`
-     */
+
+    _config: {
+        populate: false,
+        restPrefix: '/user/:userid/',
+        pluralize: false,
+    },
+    // gets the routes for a specific user
+    getRoutes: function(req, res) {
+        Route.find({
+            owner: req.param('username')
+        }, function(err, route) {
+            if (err) {
+                res.send(err);
+            } else if (user) {
+                res.send(route);
+            }
+        });
+    },
+
     createRoute: function(req, res) {
         var route = {
-            name: req.body.name,
-            owner: req.param('userid')
+            routename: req.body.routename,
+            owner: req.param('username')
         };
         Route.create(route).then(function(data) {
             res.send(data);
@@ -21,25 +37,39 @@ module.exports = {
         });
     },
 
-    getBlogs: function(req, res) {
-        Route.findOne({
-            id: req.param('routeid')
-        }).populate('blogs').exec(function(err, data) {
-            if (data) {
-                res.send(data.blogs);
-            } else if (err) {
-                res.send(err);
-            }
-        });
-    },
-
     updateRoute: function(req, res) {
+
+        // Route.find({
+        //     routename: req.param('routename')
+        // }).populate('blogs').exec(function(err, poison) {
+        //     var route = poison.pop();
+        //     _.each(route.blogs, function() {
+
+        //     });
+        //     route.routename = "OKAOKOAKOAKOAKOAKOAKOAKOAKOKASPPOOOOP"
+        //     route.save();
+        // })
+
+
+        //TODO: find a better way to do this, can we remove some of these res.sends
         Route.update({
-            id: req.param('routeid')
+            routename: req.param('routename')
         }, {
-            name: req.body.name
+            routename: req.body.routename
         }).then(function(updated) {
             res.send(updated);
+        }).then(function() {
+
+            Blog.update({
+                owner: req.param('routename')
+            }, {
+                owner: req.body.routename
+            }).then(function(updated) {
+                res.send(updated);
+            }).catch(function(err) {
+                res.send(err);
+            });
+
         }).catch(function(err) {
             res.send(err);
         });
@@ -50,7 +80,7 @@ module.exports = {
      */
     deleteRoute: function(req, res) {
         Route.destroy({
-            id: req.param('routeid')
+            routename: req.param('routename')
         }).then(function(deleted) {
             res.send(deleted);
         }).catch(function(err) {

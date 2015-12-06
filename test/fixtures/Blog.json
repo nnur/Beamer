@@ -1,0 +1,28 @@
+[{
+        "id": "1",
+        "title": "blablablog",
+        "text": "i am a writer",
+        "owner": "rararoute",
+        "author": "nnur",
+        "createdAt": {
+            "date": "2015-12-05"
+        },
+        "updatedAt": {
+            "date": "2015-12-05"
+        }
+    },
+
+    {
+        "id": "2",
+        "title": "bloggy",
+        "text": "text",
+        "owner": "rararoute",
+        "author": "nnur",
+        "createdAt": {
+            "date": "2015-12-05"
+        },
+        "updatedAt": {
+            "date": "2015-12-05"
+        }
+    }
+]

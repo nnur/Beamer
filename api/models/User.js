@@ -17,11 +17,13 @@ module.exports = {
             required: 'true',
             unique: true
         },
+        username: {
+            type: 'string',
+            required: 'true',
+            unique: true
+        },
         encryptedPassword: {
             type: 'string'
-        },
-        blogs: {
-            type: 'array'
         },
         routes: {
             collection: 'route',
@@ -35,6 +37,7 @@ module.exports = {
             return obj;
         }
     },
+
     // Here we encrypt password before creating a User
     beforeCreate: function(values, next) {
         values.encryptedPassword = bcrypt.hashSync(values.password);
@@ -42,9 +45,9 @@ module.exports = {
     },
 
     afterDestroy: function(deletedUsers, next) {
-        if (_.has(deletedUsers[0], 'id')) {
+        if (_.has(deletedUsers[0], 'username')) {
             Route.destroy({
-                owner: deletedUsers[0].id
+                owner: deletedUsers[0].username
             }).exec(function(err, deleted) {
                 if (err) {
                     console.log(err);
@@ -53,6 +56,7 @@ module.exports = {
                 }
             });
         }
+        next();
     },
 
     comparePassword: function(password, user, cb) {

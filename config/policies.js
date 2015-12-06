@@ -30,7 +30,8 @@ module.exports.policies = {
 
     'UserController': {
         'signup': true, // We dont need authorization here, allowing public access
-        'login': true
+        'login': true,
+        'actionForbidden': false
     }
 
     /***************************************************************************
