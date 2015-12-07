@@ -14,7 +14,6 @@ module.exports = {
     },
 
     signup: function(req, res) {
-
         User.create(req.body).exec(function(err, user) {
             if (err) {
                 return res.json(err.status, {
@@ -24,52 +23,47 @@ module.exports = {
             // If user created successfuly we return user and token as response
             if (user) {
                 // NOTE: payload is { id: user.id}
-                res.json(200, {
-                    user: user,
-                    token: jwToken.issue({
-                        id: user.id
-                    })
+                res.send(201, {
+                    data: {
+                        user: user,
+                        token: jwToken.issue({
+                            id: user.id
+                        })
+                    }
                 });
             }
         });
     },
 
     login: function(req, res) {
+        var email = req.body.email;
+        var password = req.body.password;
 
-        var email = req.param('email');
-        var password = req.param('password');
-
-        if (!email || !password) {
-            return res.json(401, {
-                err: 'email and password required'
-            });
+        if (_.isUndefined(email) || _.isUndefined(password)) {
+            return res.badRequest('Undefined email or password'); //400
         }
 
         User.findOne({
             email: email
-        }, function(err, user) {
-            if (!user) {
-                return res.json(401, {
-                    err: 'invalid email'
-                });
-            } else {
-
-                User.comparePassword(password, user, function(err) {
-                    if (err) {
-                        return res.json(409, {
-                            err: 'invalid password'
-                        });
-                    } else {
-                        res.json({
+        }).then(function(user) {
+            User.comparePassword(password, user, function(err) {
+                if (err) {
+                    return res.badCredentials(); // password doesnt match account
+                } else {
+                    res.send({
+                        data: {
                             user: user,
                             token: jwToken.issue({
                                 id: user.id
                             })
-                        });
-                    }
-                });
-            }
+                        }
+                    });
+                }
+            });
+        }).catch(function(err) {
+            return res.badCredentials(); // email not found
         });
+
     },
 
     updateEmail: function(req, res) {
@@ -77,10 +71,13 @@ module.exports = {
             username: req.param('username')
         }, {
             email: req.body.email
-        }).then(function(updated) {
-            res.send(updated);
+        }).then(function(updatedUsers) {
+            console.log('herrreee');
+            res.send({
+                data: updatedUsers[0]
+            });
         }).catch(function(err) {
-            res.send(err);
+            res.badRequest(err.summary);
         });
     },
 
@@ -88,7 +85,10 @@ module.exports = {
         User.destroy({
             username: req.param('username')
         }).then(function(deleted) {
-            res.send(deleted);
+            delete deleted[0].encryptedPassword
+            res.send({
+                data: deleted[0]
+            });
         }).catch(function(err) {
             res.send(err);
         });
@@ -98,12 +98,12 @@ module.exports = {
 
         User.findOne({
             username: req.param('username')
-        }, function(err, user) {
-            if (err) {
-                res.send(err);
-            } else if (user) {
-                res.send(user);
-            }
+        }).then(function(user) {
+            res.send({
+                data: user
+            });
+        }).catch(function(err) {
+            res.send(err);
         });
     }
 };

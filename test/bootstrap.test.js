@@ -21,15 +21,7 @@ before(function(done) {
     }, function(err, server) {
         //sails = server;
         if (err) return done(err);
-
-        // TODO: remove all this barell stuff, it didnt work because of tokens
-        // here you can load fixtures, etc.
-        var barrels = new Barrels();
-        fixtures = barrels.data;
-        // Populate the DB
-        barrels.populate(function(err) {
-            done(err, sails);
-        });
+        done(err, sails);
     });
 });
 

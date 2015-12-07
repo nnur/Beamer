@@ -46,7 +46,6 @@ module.exports.routes = {
     // delete user
     'DELETE /users/:username': 'UserController.deleteUser',
 
-
     /** ROUTE MODEL */
     // get all routes belonging to a user
     'GET /users/:username/routes': 'RouteController.getRoutes',

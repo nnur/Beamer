@@ -50,9 +50,9 @@ module.exports = {
                 owner: deletedUsers[0].username
             }).exec(function(err, deleted) {
                 if (err) {
-                    console.log(err);
+                    // console.log(err, 'err');
                 } else if (deleted) {
-                    console.log(deleted);
+                    // console.log(deleted, 'deleted');
                 }
             });
         }
@@ -65,5 +65,13 @@ module.exports = {
         } else { //err
             cb(true);
         }
+    },
+
+    getIdFromUsername: function(username) {
+        return User.findOne({
+            username: username
+        }).then(function(user) {
+            return user.id;
+        });
     }
 };

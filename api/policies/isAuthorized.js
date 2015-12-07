@@ -26,9 +26,7 @@ module.exports = function(req, res, next) {
     }
 
     jwToken.verify(token, function(err, token) {
-        if (err) return res.json(401, {
-            err: 'Invalid Token!'
-        });
+        if (err) return res.send(401);
         req.token = token; // This is the decrypted token or the payload you provided
         var userid;
         //extract the user id from the params in a dumb way cause sails

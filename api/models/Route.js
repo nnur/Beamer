@@ -23,9 +23,10 @@ module.exports = {
                 owner: deletedRoutes[0].routename
             }).exec(function(err, deleted) {
                 if (err) {
-                    console.log(err);
+                    // TODO: fill this out, throw it?
+                    // console.log(err);
                 } else if (deleted) {
-                    console.log(deleted);
+                    // console.log(deleted);
                 }
             });
         }
