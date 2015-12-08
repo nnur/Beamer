@@ -20,23 +20,20 @@ module.exports = {
     afterDestroy: function(deletedRoutes, next) {
         if (_.has(deletedRoutes[0], 'routename')) {
             Blog.destroy({
-                owner: deletedRoutes[0].routename
+                owner: deletedRoutes[0].id
             }).exec(function(err, deleted) {
-                if (err) {
-                    // TODO: fill this out, throw it?
-                    // console.log(err);
-                } else if (deleted) {
-                    // console.log(deleted);
-                }
+                next();
             });
+        } else {
+            next();
         }
-        next();
     },
     getIdFromRoutename: function(routename) {
         return Route.findOne({
             routename: routename
-        }).then(function(route) {
-            return route.id;
+        }).then(function(routes) {
+            if (_.has(routes, 'id'))
+                return routes.id;
         });
     }
 };

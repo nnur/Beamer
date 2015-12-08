@@ -26,7 +26,6 @@ describe('User controller', function() {
     });
 
     afterEach(function(done) {
-
         // Since we create a User beforeEach test,
         // we have to dump the database afterEach
         // to avoid duplicates

@@ -8,7 +8,6 @@ chai.use(sinonChai);
 
 describe('User Model', function() {
     afterEach(function(done) {
-
         // Since we create a User beforeEach test,
         // we have to dump the database afterEach
         // to avoid duplicates
@@ -17,7 +16,6 @@ describe('User Model', function() {
     });
 
     it('should encrypt the user\'s password', function() {
-
         var bcrptySpy = sinon.stub(bcrypt, 'hashSync', function(password) {
             return 'encryptedPassword';
         });
@@ -25,7 +23,6 @@ describe('User Model', function() {
         var testUser = {
             password: 'testPassword'
         };
-
         User.beforeCreate(testUser, nextSpy);
         expect(testUser.encryptedPassword).to.equal('encryptedPassword');
         expect(bcrptySpy.calledWith('testPassword')).to.be.true;
@@ -41,35 +38,21 @@ describe('User Model', function() {
         var testRoute = {
             routename: 'testRouteName'
         };
-
-        var app = sails.hooks.http.app;
-        // Create a user
-        request(app)
-            .post('/users/signup')
-            .send(testUser)
-            .end(function(err, res) {
-                testUser.token = res.body.data.token;
-                testUser.id = res.body.data.user.id;
-                // give that user a route
-                request(app)
-                    .post('/users/' + testUser.username + '/routes/')
-                    .set('Authorization', 'Bearer ' + testUser.token)
-                    .send(testRoute)
-                    .end(function(err, res) {
-                        // find the user that was created
-                        User.findOne(testUser.id).exec(function(err, user) {
-                            // afterDestroy should delete route
-                            User.afterDestroy([user], function() {
-                                Route.findOne({
-                                    owner: testUser.id
-                                }).exec(function(err, routes) {
-                                    expect(routes).to.be.empty;
-                                    done();
-                                });
-                            });
+        User.create(testUser).then(function(user) {
+            Route.create(_.extend(testRoute, {
+                    owner: user.id
+                }))
+                .then(function(route) {
+                    User.afterDestroy([user], function() {
+                        Route.findOne({
+                            owner: user.id
+                        }).then(function(route) {
+                            expect(route).to.be.empty;
+                            done();
                         });
                     });
-            });
+                });
+        });
     });
 
     it('should take a password and check if it\'s correct', function() {
@@ -89,19 +72,13 @@ describe('User Model', function() {
             password: 'password',
             username: 'test_username',
         };
-
-        var app = sails.hooks.http.app;
-        // Create a user
-        request(app)
-            .post('/users/signup')
-            .send(testUser)
-            .end(function(err, res) {
-                User.getIdFromUsername(testUser.username)
-                    .then(function(userid) {
-                        expect(userid).to.equal(res.body.data.user.id);
-                        done();
-                    });
-            });
+        User.create(testUser).then(function(user) {
+            User.getIdFromUsername(user.username)
+                .then(function(userid) {
+                    expect(userid).to.equal(user.id);
+                    done();
+                });
+        });
     });
 
 });
