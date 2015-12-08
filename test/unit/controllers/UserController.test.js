@@ -90,7 +90,6 @@ describe('User controller', function() {
                     .end(function(err, res) {
                         if (err) return done(err);
                         // check the composition of the response
-                        //console.log(res);
                         var user = res.body.data.user;
                         expect(user.email).to.equal('test@email.com');
                         expect(user.username).to.equal('test_username');

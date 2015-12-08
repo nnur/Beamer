@@ -46,10 +46,8 @@ module.exports = {
         User.findOne({
             email: email
         }).then(function(user) {
-            User.comparePassword(password, user, function(err) {
-                if (err) {
-                    return res.badCredentials(); // password doesnt match account
-                } else {
+            return User.comparePassword(password, user)
+                .then(function() {
                     res.send({
                         data: {
                             user: user,
@@ -58,8 +56,7 @@ module.exports = {
                             })
                         }
                     });
-                }
-            });
+                });
         }).catch(function(err) {
             return res.badCredentials(); // email not found
         });

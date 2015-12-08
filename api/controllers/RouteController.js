@@ -56,7 +56,6 @@ module.exports = {
                 data: updatedRoutes[0]
             });
         }).catch(function(err) {
-            console.log('sending a conflict!');
             res.conflict();
         });
     },

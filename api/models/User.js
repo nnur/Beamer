@@ -6,6 +6,7 @@
  */
 
 var bcrypt = require('bcrypt-nodejs');
+var noop = require('node-noop').noop;
 
 module.exports = {
 
@@ -32,39 +33,35 @@ module.exports = {
         // We don't wan't to send back encrypted password either
         toJSON: function() {
             var obj = this.toObject();
-
             delete obj.encryptedPassword;
             return obj;
         }
     },
 
     // Here we encrypt password before creating a User
-    beforeCreate: function(values, next) {
-        values.encryptedPassword = bcrypt.hashSync(values.password);
+    beforeCreate: function(user, next) {
+        user.encryptedPassword = bcrypt.hashSync(user.password);
         next();
     },
 
     afterDestroy: function(deletedUsers, next) {
         if (_.has(deletedUsers[0], 'username')) {
             Route.destroy({
-                owner: deletedUsers[0].username
-            }).exec(function(err, deleted) {
-                if (err) {
-                    // console.log(err, 'err');
-                } else if (deleted) {
-                    // console.log(deleted, 'deleted');
-                }
-            });
+                    owner: deletedUsers[0].id
+                })
+                .exec(function(err, deleted) {
+                    next();
+                });
         }
-        next();
     },
 
-    comparePassword: function(password, user, cb) {
-        if (bcrypt.compareSync(password, user.encryptedPassword)) {
-            cb(false);
-        } else { //err
-            cb(true);
-        }
+    comparePassword: function(password, user) {
+        return new Promise(function(resolve, reject) {
+            if (bcrypt.compareSync(password, user.encryptedPassword)) {
+                return resolve();
+            }
+            reject();
+        });
     },
 
     getIdFromUsername: function(username) {

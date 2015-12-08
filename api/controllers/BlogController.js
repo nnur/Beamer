@@ -15,29 +15,33 @@ module.exports = {
     // },
     // -----------CRUDDIN'-----------
     getBlogs: function(req, res) {
-        Blog.find({
-            owner: req.param('routename'),
-            author: req.param('username')
-        }, function(err, blog) {
-            if (err) {
-                res.send(err);
-            } else if (user) {
-                res.send(blog);
-            }
-        });
+        Route.findOne({
+                routename: req.param('routename')
+            })
+            .populate('blogs')
+            .exec(function(err, data) {
+                res.send({
+                    data: {
+                        blogs: data.blogs
+                    }
+                });
+            });
     },
     createBlog: function(req, res) {
-
-        var blog = {
-            title: req.body.title,
-            text: req.body.text,
-            owner: req.param('routename'),
-            author: req.param('username')
-        };
-        Blog.create(blog).then(function(data) {
-            res.send(data);
-        }).catch(function(err) {
-            res.send(err);
+        Route.getIdFromRoutename(req.param('routename')).then(function(routeId) {
+            var blog = {
+                title: req.body.title,
+                text: req.body.text,
+                owner: routeId,
+                author: req.param('username')
+            };
+            Blog.create(blog).then(function(blog) {
+                res.send({
+                    data: blog
+                });
+            }).catch(function(err) {
+                res.conflict();
+            });
         });
     },
 
@@ -49,9 +53,11 @@ module.exports = {
             text: req.body.text,
             title: req.body.title
         }).then(function(updated) {
-            res.send(updated);
+            res.send({
+                data: updated[0]
+            });
         }).catch(function(err) {
-            res.send(err);
+            res.conflict();
         });
     },
 
@@ -61,7 +67,10 @@ module.exports = {
         Blog.destroy({
             id: req.param('blogid')
         }).then(function(deleted) {
-            res.send(deleted);
+            if (deleted.length === 0) return res.notFound();
+            res.send({
+                data: deleted[0]
+            });
         }).catch(function(err) {
             res.send(err);
         });

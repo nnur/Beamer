@@ -148,7 +148,6 @@ describe('Route controller', function() {
                 .end(function(err, res) {
                     if (err) return done(err);
                     var deletedRoute = res.body.data;
-                    //  console.log(deletedRoute);
                     expect(deletedRoute.routename).to.equal(testRoute.routename);
                     expect(deletedRoute.owner).to.equal(testUser.id);
                     expect(deletedRoute.id).to.be.a('number');

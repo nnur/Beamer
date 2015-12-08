@@ -32,7 +32,11 @@ module.exports = {
         }
         next();
     },
-    getRoutes: function() {
-
+    getIdFromRoutename: function(routename) {
+        return Route.findOne({
+            routename: routename
+        }).then(function(route) {
+            return route.id;
+        });
     }
 };
