@@ -106,13 +106,8 @@ describe('User controller', function() {
                     email: 'testWrong@email.com',
                     password: 'password'
                 })
-                .expect(422)
-                .end(function(err, res) {
-                    if (err) return done(err);
-                    // check the composition of the response
-                    expect(res.error.text).to.equal('Invalid login credentials');
-                    done();
-                });
+                .expect(422, done);
+
         });
 
         it('should return 422 if password is invalid', function(done) {
@@ -123,13 +118,8 @@ describe('User controller', function() {
                     email: 'test@email.com',
                     password: 'wrongPassword'
                 })
-                .expect(422)
-                .end(function(err, res) {
-                    if (err) return done(err);
-                    // check the composition of the response
-                    expect(res.error.text).to.equal('Invalid login credentials');
-                    done();
-                });
+                .expect(422, done);
+
         });
 
         it('should return 400 if email or password is undefined', function(done) {
@@ -178,7 +168,7 @@ describe('User controller', function() {
                 });
         });
 
-        it('should return a 401 if the token and username don\'t correspond', function(done) {
+        it('should return a 422 if the token is invalid', function(done) {
             var app = sails.hooks.http.app;
             request(app)
                 .put('/users/' + testUser.username)
@@ -186,8 +176,28 @@ describe('User controller', function() {
                 .send({
                     email: 'UPDATED@email.com'
                 })
-                .expect(401)
-                .expect('Unauthorized', done);
+                .expect(422, done);
+        });
+
+        it('should return a 422 if the token does not belong to the user', function(done) {
+            var app = sails.hooks.http.app;
+            request(app)
+                .post('/users/signup')
+                .send({
+                    email: 'another@user.com',
+                    password: 'pwd123',
+                    username: 'anotherUser'
+                })
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    request(app)
+                        .put('/users/' + testUser.username)
+                        .set('Authorization', 'Bearer ' + res.body.data.token)
+                        .send({
+                            email: 'UPDATED@email.com'
+                        })
+                        .expect(401, done);
+                });
         });
 
         it("should not update the user with invalid attributes", function(done) {

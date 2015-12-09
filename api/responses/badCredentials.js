@@ -6,6 +6,6 @@ module.exports = function(data, options) {
 
     // Set status code
     res.status(422);
-    return res.send('Invalid login credentials');
+    return res.send(data);
 
 };

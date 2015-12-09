@@ -1,45 +1,32 @@
 module.exports = function(req, res, next) {
-    var token;
+    var encryptedToken;
 
-    if (req.headers && req.headers.authorization) {
+    if (_.has(req, 'headers') && _.has(req.headers, 'authorization')) {
         var parts = req.headers.authorization.split(' ');
-        if (parts.length == 2) {
-            var scheme = parts[0],
-                credentials = parts[1];
+        var scheme = parts[0];
+        encryptedToken = parts[1];
 
-            if (/^Bearer$/i.test(scheme)) {
-                token = credentials;
-            }
-        } else {
-            return res.json(401, {
-                err: 'Format is Authorization: Bearer [token]'
-            });
+        if (scheme !== 'Bearer') {
+            return res.badRequest('Format is Authorization: Bearer <token>');
         }
-    } else if (req.param('token')) {
-        token = req.param('token');
-        // We delete the token from param to not mess with blueprints
-        delete req.query.token;
+
     } else {
-        return res.json(401, {
-            err: 'No Authorization header was found'
-        });
+        return res.badRequest('No Authorization header was found');
     }
 
-    jwToken.verify(token, function(err, token) {
-        if (err) return res.send(401);
+    jwToken.verify(encryptedToken, function(err, token) {
+        if (err) return res.badCredentials('Invalid Token');
         req.token = token; // This is the decrypted token or the payload you provided
-        var userid;
-        //extract the user id from the params in a dumb way cause sails
-        if (_.isUndefined(req.param('userid'))) {
-            userid = _.isUndefined(req.param('parentid')) ? req.param('id') : req.param('parentid');
-        } else {
-            userid = req.param('userid');
-        }
-        // if (req.token.id != userid) {
-        //     return res.json(401, {
-        //         err: 'Token mismatch!'
-        //     });
-        // }
-        next();
+
+        User.getIdFromUsername(req.param('username')).then(function(userid) {
+            if (req.token.id != userid) {
+                return res.unauthorized('Token does not belong to the user!');
+            }
+            next();
+        }).catch(function(err) {
+            res.badCredentials('Invalid username');
+            next();
+        });
+
     });
 };

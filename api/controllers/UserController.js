@@ -58,7 +58,9 @@ module.exports = {
                     });
                 });
         }).catch(function(err) {
-            return res.badCredentials(); // email not found
+            return res.badCredentials({
+                errors: ['Invalid login credentials']
+            }); // email not found
         });
 
     },
@@ -69,7 +71,6 @@ module.exports = {
         }, {
             email: req.body.email
         }).then(function(updatedUsers) {
-            console.log('herrreee');
             res.send({
                 data: updatedUsers[0]
             });
@@ -82,7 +83,7 @@ module.exports = {
         User.destroy({
             username: req.param('username')
         }).then(function(deleted) {
-            delete deleted[0].encryptedPassword
+            delete deleted[0].encryptedPassword;
             res.send({
                 data: deleted[0]
             });
