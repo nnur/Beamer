@@ -5,12 +5,13 @@ app.config(function($routeProvider) {
             templateUrl: 'views/edit/edit-view.html',
             controller: 'EditController'
         })
-        .when('/profile/:id', {
+        .when('/profile/:username', {
             templateUrl: 'views/profile/profile-view.html',
             controller: 'ProfileController',
             resolve: {
-                lemmons: function($route) {
-                    return $route;
+                user: function($route, DS) {
+                    var username = $route.current.params.username;
+                    return DS.find('users', username);
                 }
             }
         })

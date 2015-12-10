@@ -39,9 +39,9 @@
                     <span class="sr-only">Error:</span> {{signup.error}}
                 </div>
                 <!-- INPUTS -->
+                <input type="text" ng-model="user.username" placeholder="username" required>
                 <input type="email" ng-model="user.newEmail" placeholder="email" required/>
                 <input type="password" ng-model="user.pwd1" name="uPwd" placeholder="password" required ng-minlength="6" ng-maxlength="40" />
-                <input type="password" ng-model="user.pwd2" name="cPwd" required placeholder="confirm password" ng-minlength="6" ng-maxlength="40" />
             </div>
             <!-- BUTTONS -->
             <div class="row">
