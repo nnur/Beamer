@@ -31,7 +31,7 @@ function LoginController($scope, auth, $location) {
             email: 'dharness@uwo.ca',
             password: 'bluecakes'
         };
-        auth.loginUser(user).then(loginSuccess, loginError);
+        // auth.loginUser(user).then(loginSuccess, loginError);
     })();
 
     // This parses the error and adds it to the scope to be shown

@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+    console.log('AALALALALLALALLALALAAAALLLLAAAAHHHHUUUAAKBAR');
 
     grunt.config.set('sass', {
         dev: {

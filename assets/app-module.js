@@ -1,17 +1,20 @@
 app = angular.module('beamer', ['beamer.views.edit', 'beamer.views.profile',
     'beamer.common.login', 'beamer.common.auth', 'beamer.common.session',
     'beamer.common.sidebar', 'beamer.common.routeListItem', 'ngFileUpload',
-    'ngResource', 'ngRoute', 'angular-jwt', 'smoothScroll', 'js-data'
+    'ngRoute', 'angular-jwt', 'smoothScroll', 'js-data'
 ]);
 
-
-app.config(function($httpProvider, $locationProvider, jwtInterceptorProvider) {
+function jwtConfig(jwtInterceptorProvider) {
     // Send a jwt on all http requests
     jwtInterceptorProvider.tokenGetter = ['session',
         function(session) {
             return session.token;
         }
     ];
+}
+
+app.config(jwtConfig);
+app.config(function($httpProvider, $locationProvider) {
     $httpProvider.interceptors.push('jwtInterceptor');
     $locationProvider.html5Mode(true);
 });
@@ -32,7 +35,6 @@ app.run(function($rootScope, $location, auth, unprotected, DS) {
             $location.path('/signup');
         }
     });
-
 
 
     DS.defineResource({
