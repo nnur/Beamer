@@ -88,7 +88,6 @@ module.exports = {
     },
 
     getUser: function(req, res) {
-
         User.findOne({
             username: req.param('username')
         }).then(function(user) {
