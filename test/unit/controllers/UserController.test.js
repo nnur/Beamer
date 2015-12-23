@@ -160,7 +160,7 @@ describe('User controller', function() {
                 .expect(200)
                 .end(function(err, res) {
                     if (err) return done(err);
-                    var user = res.body.data;
+                    var user = res.body.data.user;
                     expect(user.email).to.equal('test@email.com');
                     expect(user.username).to.equal('test_username');
                     expect(user.id).to.be.a('number');
