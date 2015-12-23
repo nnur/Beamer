@@ -93,7 +93,6 @@ module.exports = {
             })
             .populate('routes')
             .exec(function(err, data) {
-                console.log(data);
                 res.send({
                     data: {
                         user: data
