@@ -5,81 +5,108 @@
  for managing Users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-
 var bcrypt = require('bcrypt');
 
 module.exports = {
 
-    signup: function(req, res) {
+    actionForbidden: function(req, res) {
+        res.forbidden();
+    },
 
-        User.create(req.body).exec(function(err, user) {
-            if (err) {
-                return res.json(err.status, {
-                    err: err
-                });
-            }
-            // If user created successfuly we return user and token as response
-            if (user) {
-                // NOTE: payload is { id: user.id}
-                res.json(200, {
+    signup: function(req, res) {
+        User.create(req.body).then(function(user) {
+            res.send(201, {
+                data: {
                     user: user,
                     token: jwToken.issue({
                         id: user.id
                     })
-                });
-            }
+                }
+            });
+        }).catch(function(err) {
+            return res.send(err.status, {
+                err: err
+            });
         });
     },
 
     login: function(req, res) {
+        var email = req.body.email;
+        var password = req.body.password;
 
-
-        var email = req.param('email');
-        var password = req.param('password');
-
-        if (!email || !password) {
-            return res.json(401, {
-                err: 'email and password required'
-            });
+        if (_.isUndefined(email) || _.isUndefined(password)) {
+            return res.badRequest('Undefined email or password'); //400
         }
 
         User.findOne({
             email: email
-        }, function(err, user) {
-            if (!user) {
-                return res.json(401, {
-                    err: 'invalid email'
-                });
-            } else {
-
-                User.comparePassword(password, user, function(err) {
-                    if (err) {
-                        return res.json(401, {
-                            err: 'invalid password'
-                        });
-                    } else {
-                        res.json({
+        }).then(function(user) {
+            return User.comparePassword(password, user)
+                .then(function() {
+                    res.send({
+                        data: {
                             user: user,
                             token: jwToken.issue({
                                 id: user.id
                             })
-                        });
-                    }
+                        }
+                    });
                 });
-            }
+        }).catch(function(err) {
+            return res.badCredentials({
+                errors: ['Invalid login credentials']
+            }); // email not found
         });
 
     },
 
-    deleteUser: function(req, res) {
-        var userid = req.token.id;
-
-        User.destroy({
-            id: userid
-        }).exec(function deleteCB(err) {
-            res.send('user has been deleted');
+    updateEmail: function(req, res) {
+        User.update({
+            username: req.param('username')
+        }, {
+            email: req.body.email
+        }).then(function(updatedUsers) {
+            res.send({
+                data: updatedUsers[0]
+            });
+        }).catch(function(err) {
+            res.badRequest(err.summary);
         });
+    },
 
+    deleteUser: function(req, res) {
+        User.destroy({
+            username: req.param('username')
+        }).then(function(deleted) {
+            delete deleted[0].encryptedPassword;
+            res.send({
+                data: deleted[0]
+            });
+        }).catch(function(err) {
+            res.send(err);
+        });
+    },
+
+    getUser: function(req, res) {
+        User.findOne({
+                username: req.param('username')
+            })
+            .populate('routes')
+            .exec(function(err, data) {
+                res.send({
+                    data: {
+                        user: data
+                    }
+                });
+            });
+        //         User.findOne({
+        //     username: req.param('username')
+        // }).then(function(user) {
+        //     res.send({
+        //         data: user
+        //     });
+        // }).catch(function(err) {
+        //     res.send(err);
+        // });
     }
-
 };

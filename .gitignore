@@ -84,7 +84,6 @@ dump.rdb
 
 
 
-
 ################################################
 # Node.js / NPM
 #
@@ -116,3 +115,4 @@ npm-debug.log
 nbproject
 .idea
 .node_history
+.sass-cache

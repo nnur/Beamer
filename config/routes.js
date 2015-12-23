@@ -32,11 +32,41 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
 
-    // 'get /homepage': 'UserController.profile'
+    /** USER MODEL */
+    // login user
+    'POST /users/login': 'UserController.login',
+    // create user
+    'POST /users/signup': 'UserController.signup',
+    // can't get all user
+    'GET /users': 'UserController.actionForbidden',
+    // update user
+    'PUT /users/:username': 'UserController.updateEmail',
+    // get user
+    'GET /users/:username': 'UserController.getUser',
+    // delete user
+    'DELETE /users/:username': 'UserController.deleteUser',
 
-    // 'get /signup': {
-    //     view: 'signup'
-    // }
+    /** ROUTE MODEL */
+    // get all routes belonging to a user
+    'GET /users/:username/routes': 'RouteController.getRoutes',
+    // create a route
+    'POST /users/:username/routes': 'RouteController.createRoute',
+    // update a route
+    'PUT /users/:username/routes/:routename': 'RouteController.updateRoute',
+    // destroy a route
+    'DELETE /users/:username/routes/:routename': 'RouteController.deleteRoute',
+
+    /** BLOG MODEL */
+    // get all blogs belonging to a route
+    'GET /users/:username/routes/:routename/blogs': 'BlogController.getBlogs',
+    // create a blog
+    'POST /users/:username/routes/:routename/blogs': 'BlogController.createBlog',
+    // update a blog
+    'PUT /users/:username/routes/:routename/blogs/:blogid': 'BlogController.updateBlog',
+    // delete a blog
+    'DELETE /users/:username/routes/:routename/blogs/:blogid': 'BlogController.deleteBlog',
+
+
     /***************************************************************************
      *                                                                          *
      * Custom routes here...                                                    *

@@ -7,127 +7,72 @@
 
 module.exports = {
 
-
+    // _config: {
+    //     rest: true,
+    //     populate: false,
+    //     restPrefix: '/user/:userid/route/:routeid/',
+    //     pluralize: true,
+    // },
     // -----------CRUDDIN'-----------
-
-    create: function(req, res) {
-
-
-        var tokenid = req.token.id;
-        req.body.userid = tokenid;
-
-
-
-        Blog.create(req.body).exec(function(err, blog) {
-            if (err) {
-                return res.json(err.status, {
-                    err: err
-                });
-            }
-            // If blog created successfuly
-            if (blog) {
-
-                //update user's blog list
-                blogManager.addBlog(tokenid, blog.id, function(blog, err) {
-
-                    if (blog) {
-                        res.send(blog);
-                    } else if (err) {
-                        res.send(err);
-                    }
-                });
-
-
-            }
-        });
-
-    },
-
-    //get all blogs from a user
-    getAllBlogs: function(req, res) {
-
-        var userid = req.token.id;
-
-        Blog.find()
-            .where({
-                userid: userid
+    getBlogs: function(req, res) {
+        Route.findOne({
+                routename: req.param('routename')
             })
-            .exec(function(err, blogs) {
-
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.send(blogs);
-                }
-
-            });
-
-    },
-
-    updateText: function(req, res) {
-
-        var tokenid = req.token.id;
-        var blogid = req.body.blogid;
-
-
-        Blog.findOne({
-            id: blogid
-        }, function(err, blog) {
-            if (blog && blog.userid == tokenid) {
-
-                if (!blog.text) {
-
-                    blog.text = "";
-                }
-
-                blog.text = req.body.text;
-
-                blog.save(function(error) {
-                    if (error) {
-
-                        res.send(error);
-
-                    } else {
-                        res.send(blog);
+            .populate('blogs')
+            .exec(function(err, data) {
+                res.send({
+                    data: {
+                        blogs: data.blogs
                     }
                 });
-
-            } else if (err) {
-                res.send(err);
-            } else {
-                res.send('could not update');
-            }
-
+            });
+    },
+    createBlog: function(req, res) {
+        Route.getIdFromRoutename(req.param('routename')).then(function(routeId) {
+            var blog = {
+                title: req.body.title,
+                text: req.body.text,
+                owner: routeId,
+                author: req.param('username')
+            };
+            Blog.create(blog).then(function(blog) {
+                res.send({
+                    data: blog
+                });
+            }).catch(function(err) {
+                res.conflict();
+            });
         });
-
-
-
     },
 
 
-    //tst userid
-    delete: function(req, res) {
+    updateBlog: function(req, res) {
+        Blog.update({
+            id: req.param('blogid')
+        }, {
+            text: req.body.text,
+            title: req.body.title
+        }).then(function(updated) {
+            res.send({
+                data: updated[0]
+            });
+        }).catch(function(err) {
+            res.conflict();
+        });
+    },
 
 
-        var blogid = req.body.blogid;
-        var tokenid = req.token.id;
-
-
-
+    //delete blog
+    deleteBlog: function(req, res) {
         Blog.destroy({
-            id: req.body.id,
-            userid: tokenid
-
-        }).exec(function deleteCB(err, blog) {
-            if (err) {
-                res.send(err);
-            } else {
-
-                res.send(blog);
-
-                blogManager.deleteBlog(tokenid, blog.id);
-
-            }
+            id: req.param('blogid')
+        }).then(function(deleted) {
+            if (deleted.length === 0) return res.notFound();
+            res.send({
+                data: deleted[0]
+            });
+        }).catch(function(err) {
+            res.send(err);
         });
 
     }

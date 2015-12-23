@@ -10,34 +10,21 @@ module.exports = {
     schema: true,
 
     attributes: {
-
         text: {
             type: 'text',
             required: false,
             unique: false
-
         },
-
         title: {
             type: 'string',
-            required: 'true',
-            unique: false
+            required: true,
+            unique: true
         },
-
-        userid: {
-
+        owner: {
+            model: 'route'
+        },
+        author: {
+            type: 'string'
         }
-
-
-
-    },
-
-    beforeDestroy: function(values, next) {
-
-        console.log('hehe');
-        console.log(values);
     }
-
-
-
 };
