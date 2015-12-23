@@ -89,13 +89,25 @@ module.exports = {
 
     getUser: function(req, res) {
         User.findOne({
-            username: req.param('username')
-        }).then(function(user) {
-            res.send({
-                data: user
+                username: req.param('username')
+            })
+            .populate('routes')
+            .exec(function(err, data) {
+                console.log(data);
+                res.send({
+                    data: {
+                        user: data
+                    }
+                });
             });
-        }).catch(function(err) {
-            res.send(err);
-        });
+        //         User.findOne({
+        //     username: req.param('username')
+        // }).then(function(user) {
+        //     res.send({
+        //         data: user
+        //     });
+        // }).catch(function(err) {
+        //     res.send(err);
+        // });
     }
 };
