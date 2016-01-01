@@ -29,6 +29,7 @@ module.exports = {
 
     createRoute: function(req, res) {
         var UserId;
+        req.body.routename = req.body.routename.replace(/[^a-zA-Z ]/g, "");
         User.getIdFromUsername(req.param('username'))
             .then(function(userId) {
                 var route = {
@@ -46,7 +47,7 @@ module.exports = {
     },
 
     updateRoute: function(req, res) {
-
+        req.body.routename = req.body.routename.replace(/[^a-zA-Z ]/g, "");
         Route.update({
             routename: req.param('routename')
         }, {
