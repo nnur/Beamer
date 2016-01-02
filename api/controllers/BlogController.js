@@ -7,12 +7,6 @@
 
 module.exports = {
 
-    // _config: {
-    //     rest: true,
-    //     populate: false,
-    //     restPrefix: '/user/:userid/route/:routeid/',
-    //     pluralize: true,
-    // },
     // -----------CRUDDIN'-----------
     getBlogs: function(req, res) {
         Route.findOne({

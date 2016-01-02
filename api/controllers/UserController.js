@@ -15,6 +15,7 @@ module.exports = {
 
     signup: function(req, res) {
         User.create(req.body).then(function(user) {
+            user.metrics = user.getMetrics();
             res.send(201, {
                 data: {
                     user: user,
@@ -99,14 +100,5 @@ module.exports = {
                     }
                 });
             });
-        //         User.findOne({
-        //     username: req.param('username')
-        // }).then(function(user) {
-        //     res.send({
-        //         data: user
-        //     });
-        // }).catch(function(err) {
-        //     res.send(err);
-        // });
     }
 };

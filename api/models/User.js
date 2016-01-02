@@ -6,7 +6,6 @@
  */
 
 var bcrypt = require('bcrypt-nodejs');
-var noop = require('node-noop').noop;
 
 module.exports = {
 
