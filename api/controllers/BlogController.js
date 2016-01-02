@@ -27,7 +27,8 @@ module.exports = {
                 title: req.body.title,
                 text: req.body.text,
                 owner: routeId,
-                author: req.param('username')
+                author: req.param('username'),
+                routename: req.param('routename')
             };
             Blog.create(blog).then(function(blog) {
                 res.send({
