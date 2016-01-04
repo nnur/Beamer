@@ -7,12 +7,6 @@
 
 module.exports = {
 
-    // _config: {
-    //     rest: true,
-    //     populate: false,
-    //     restPrefix: '/user/:userid/route/:routeid/',
-    //     pluralize: true,
-    // },
     // -----------CRUDDIN'-----------
     getBlogs: function(req, res) {
         Route.findOne({
@@ -43,7 +37,8 @@ module.exports = {
                 title: req.body.title,
                 text: req.body.text,
                 owner: routeId,
-                author: req.param('username')
+                author: req.param('username'),
+                routename: req.param('routename')
             };
             Blog.create(blog).then(function(blog) {
                 res.send({

@@ -49,6 +49,8 @@ module.exports.routes = {
     /** ROUTE MODEL */
     // get all routes belonging to a user
     'GET /users/:username/routes': 'RouteController.getRoutes',
+    // get a particular route
+    'GET /users/:username/routes/:routename': 'RouteController.getRoute',
     // create a route
     'POST /users/:username/routes': 'RouteController.createRoute',
     // update a route

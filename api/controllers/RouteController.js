@@ -26,7 +26,18 @@ module.exports = {
                 });
             });
     },
-
+    // TODO: test this function
+    getRoute: function(req, res) {
+        Route.findOne({
+                routename: req.param('routename')
+            })
+            .populate('blogs')
+            .exec(function(err, data) {
+                res.send({
+                    data: data
+                })
+            })
+    },
     createRoute: function(req, res) {
         var UserId;
         req.body.routename = req.body.routename.replace(/[^a-zA-Z ]/g, "");
