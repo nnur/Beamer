@@ -59,6 +59,8 @@ module.exports.routes = {
     /** BLOG MODEL */
     // get all blogs belonging to a route
     'GET /users/:username/routes/:routename/blogs': 'BlogController.getBlogs',
+    // get one blog
+    'GET /users/:username/routes/:routename/blogs/:blogid': 'BlogController.getBlog',
     // create a blog
     'POST /users/:username/routes/:routename/blogs': 'BlogController.createBlog',
     // update a blog

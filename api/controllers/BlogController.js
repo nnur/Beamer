@@ -27,6 +27,16 @@ module.exports = {
                 });
             });
     },
+
+    getBlog: function(req, res) {
+        Blog.findOne({
+            id: req.param('blogid')
+        }).exec(function(err, blog) {
+            res.send({
+                data: blog
+            })
+        });
+    },
     createBlog: function(req, res) {
         Route.getIdFromRoutename(req.param('routename')).then(function(routeId) {
             var blog = {
