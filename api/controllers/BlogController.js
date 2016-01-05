@@ -14,6 +14,11 @@ module.exports = {
             })
             .populate('blogs')
             .exec(function(err, data) {
+                if (_.isUndefined(data)) {
+                    data = {
+                        blogs: []
+                    }
+                }
                 res.send({
                     data: {
                         blogs: data.blogs
@@ -22,6 +27,7 @@ module.exports = {
             });
     },
     createBlog: function(req, res) {
+
         Route.getIdFromRoutename(req.param('routename')).then(function(routeId) {
             var blog = {
                 title: req.body.title,
@@ -35,6 +41,7 @@ module.exports = {
                     data: blog
                 });
             }).catch(function(err) {
+                console.log(err);
                 res.conflict();
             });
         });

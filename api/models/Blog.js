@@ -14,8 +14,8 @@ module.exports = {
         },
         title: {
             type: 'string',
-            required: true,
-            unique: true
+            required: false,
+            unique: false
         },
         owner: {
             model: 'route'

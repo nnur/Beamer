@@ -15,7 +15,6 @@ module.exports = {
 
     signup: function(req, res) {
         User.create(req.body).then(function(user) {
-            user.metrics = user.getMetrics();
             res.send(201, {
                 data: {
                     user: user,
