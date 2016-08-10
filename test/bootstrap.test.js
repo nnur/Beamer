@@ -2,6 +2,8 @@ var Sails = require('sails'),
     sails = 'sdf';
 var Barrels = require('barrels');
 
+
+// good stuff
 before(function(done) {
 
     // Increase the Mocha timeout so that Sails has enough time to lift.
